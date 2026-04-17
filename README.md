@@ -1,92 +1,73 @@
-# Driver License Practice Test Portal
+# DLPracticeTest
 
-A React-based web application for practicing driver license test questions.
+A ReactJS-based web portal for driver license practice tests, enabling users to take timed practice exams with multiple-choice questions, track progress, and review results.
 
 ## Features
 
-- Interactive practice questions
-- Real-time progress tracking
-- Results summary with score calculation
-- Local storage for progress persistence
-- Responsive design
+- **Multiple-Choice Questions**: Practice tests with various question types and answer options
+- **Progress Tracking**: Real-time display of current question number and total question count
+- **Response Management**: Track and store user responses for each question during the test
+- **Test Completion**: Comprehensive results summary with scoring information
+- **Answer Review**: Review all answers after test completion
+- **Persistent Storage**: Local storage support for test attempts and scores using `storageService`
+- **Responsive UI**: Clean, user-friendly interface built with React components
 
-## Prerequisites
+## Architecture
 
-- Node.js (v14 or higher)
-- npm (v6 or higher)
+### Core Components
 
-## Installation
+- **App.js**: Main application component managing test state and routing
+- **HomePage.js**: Landing page for test selection and initialization
+- **TestPortal.js**: Main testing interface displaying questions and capturing responses
+- **Question.js**: Individual question component with answer options
+- **ResultsScreen.js**: Results summary and answer review screen
 
-1. Clone the repository:
-```bash
-git clone https://github.com/ampspaul/DLPracticeTest.git
-cd DLPracticeTest
-```
+### Services
 
-2. Install dependencies:
+- **storageService.js**: Handles persistent storage of test attempts, user responses, and scores
+
+## Usage
+
+### Installation
+
 ```bash
 npm install
 ```
 
-## Usage
+### Running the Application
 
-### Development Mode
-
-Start the development server:
 ```bash
 npm start
 ```
 
-The application will open at `http://localhost:3000`
+The application will open at `http://localhost:3000`.
 
-### Build for Production
+## Test Workflow
 
-```bash
-npm run build
-```
+1. User navigates to the home page and selects a practice test
+2. Questions are displayed one at a time in the TestPortal
+3. User selects an answer and navigates to the next question
+4. Progress bar shows current position (e.g., "Question 5 of 50")
+5. Upon completion, results are displayed with scoring summary
+6. User can review all answers on the ResultsScreen
+7. Test attempts and scores are persisted for future reference
 
-Creates an optimized production build in the `build/` directory.
+## Storage
 
-### Running Tests
+The `storageService` module provides the following functionality:
 
-```bash
-npm test
-```
+- Save test attempts with responses
+- Retrieve historical test results
+- Store user scores and answer summaries
+- Support for both localStorage and sessionStorage strategies
 
-## Project Structure
+## Styling
 
-```
-src/
-├── components/
-│   ├── HomePage.js         # Landing page
-│   ├── TestPortal.js       # Main test interface
-│   ├── Question.js         # Individual question component
-│   └── ResultsScreen.js    # Results display
-├── services/
-│   └── storageService.js   # Local storage management
-├── App.js                  # Main app component
-├── App.css                 # Global styles
-└── index.js                # Entry point
-```
+The application uses CSS modules with `App.css` for consistent theming and responsive design.
 
-## How It Works
+## Browser Support
 
-1. Start on the home page
-2. Click "Start Test" to begin
-3. Answer each question by selecting an option
-4. Review your results on the final screen
-5. Progress is automatically saved locally
-
-## Technologies Used
-
-- React 18
-- CSS3
-- LocalStorage API
-
-## License
-
-MIT License - see LICENSE file for details
-
-## Author
-
-ampspaul
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
