@@ -1,120 +1,175 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import TestPortal from '../TestPortal';
-import * as questionsService from '../../services/questionsService';
 
-jest.mock('../../services/questionsService');
+// Mock storageService
+jest.mock('../../services/storageService', () => ({
+  saveProgress: jest.fn(),
+}));
 
-describe('TestPortal Component', () => {
-  const mockQuestions = [
-    {
-      text: 'Q1',
-      options: ['A', 'B', 'C', 'D'],
-      correctAnswer: 'A',
-    },
-    {
-      text: 'Q2',
-      options: ['A', 'B', 'C', 'D'],
-      correctAnswer: 'B',
-    },
-  ];
+const mockQuestions = [
+  {
+    id: 'q1',
+    text: 'What does a red traffic light mean?',
+    options: ['Stop', 'Go', 'Slow down', 'Yield'],
+    correctAnswer: 'Stop',
+  },
+  {
+    id: 'q2',
+    text: 'What is the speed limit in a school zone?',
+    options: ['15 mph', '25 mph', '35 mph', '45 mph'],
+    correctAnswer: '25 mph',
+  },
+];
 
+const mockOnTestComplete = jest.fn();
+
+describe('TestPortal heading', () => {
+  it('renders an h1 with the exact text "TN Driver Licence Practice Test"', () => {
+    render(
+      <TestPortal questions={mockQuestions} onTestComplete={mockOnTestComplete} />
+    );
+
+    const heading = screen.getByRole('heading', { level: 1, name: 'TN Driver Licence Practice Test' });
+    expect(heading).toBeInTheDocument();
+    expect(heading.tagName).toBe('H1');
+    expect(heading.textContent).toBe('TN Driver Licence Practice Test');
+  });
+
+  it('heading text matches exactly including casing and spacing', () => {
+    render(
+      <TestPortal questions={mockQuestions} onTestComplete={mockOnTestComplete} />
+    );
+
+    const heading = screen.getByRole('heading', { level: 1 });
+    expect(heading.textContent).toBe('TN Driver Licence Practice Test');
+  });
+
+  it('heading persists after navigating to the next question', () => {
+    render(
+      <TestPortal questions={mockQuestions} onTestComplete={mockOnTestComplete} />
+    );
+
+    // Confirm heading present on first question
+    expect(
+      screen.getByRole('heading', { level: 1, name: 'TN Driver Licence Practice Test' })
+    ).toBeInTheDocument();
+
+    // Navigate to next question
+    fireEvent.click(screen.getByRole('button', { name: /next question/i }));
+
+    // Heading should still be present
+    expect(
+      screen.getByRole('heading', { level: 1, name: 'TN Driver Licence Practice Test' })
+    ).toBeInTheDocument();
+  });
+
+  it('heading persists after navigating back to the previous question', () => {
+    render(
+      <TestPortal questions={mockQuestions} onTestComplete={mockOnTestComplete} />
+    );
+
+    // Navigate forward then back
+    fireEvent.click(screen.getByRole('button', { name: /next question/i }));
+    fireEvent.click(screen.getByRole('button', { name: /previous question/i }));
+
+    expect(
+      screen.getByRole('heading', { level: 1, name: 'TN Driver Licence Practice Test' })
+    ).toBeInTheDocument();
+  });
+});
+
+describe('TestPortal existing functionality', () => {
   beforeEach(() => {
-    questionsService.loadTestQuestions.mockResolvedValue(mockQuestions);
+    mockOnTestComplete.mockClear();
+    const { saveProgress } = require('../../services/storageService');
+    saveProgress.mockClear();
   });
 
-  test('renders loading state initially', () => {
+  it('renders the first question on load', () => {
     render(
-      <TestPortal
-        testId="test-1"
-        onTestComplete={() => {}}
-        onCancel={() => {}}
-      />
+      <TestPortal questions={mockQuestions} onTestComplete={mockOnTestComplete} />
     );
 
-    expect(screen.getByText(/Loading test/)).toBeInTheDocument();
+    expect(screen.getByText('What does a red traffic light mean?')).toBeInTheDocument();
+    expect(screen.getByText('Question 1 of 2')).toBeInTheDocument();
   });
 
-  test('renders first question after loading', async () => {
+  it('shows an error when no questions are provided', () => {
     render(
-      <TestPortal
-        testId="test-1"
-        onTestComplete={() => {}}
-        onCancel={() => {}}
-      />
+      <TestPortal questions={[]} onTestComplete={mockOnTestComplete} />
     );
 
-    await waitFor(() => {
-      expect(screen.getByText('Q1')).toBeInTheDocument();
-    });
+    expect(screen.getByRole('alert')).toHaveTextContent('No questions available');
   });
 
-  test('shows correct progress indicator', async () => {
+  it('shows an error when questions prop is not an array', () => {
     render(
-      <TestPortal
-        testId="test-1"
-        onTestComplete={() => {}}
-        onCancel={() => {}}
-      />
+      <TestPortal questions={null} onTestComplete={mockOnTestComplete} />
     );
 
-    await waitFor(() => {
-      expect(screen.getByText(/Question 1 of 2/)).toBeInTheDocument();
-    });
+    expect(screen.getByRole('alert')).toHaveTextContent('No questions available');
   });
 
-  test('disables Previous button on first question', async () => {
+  it('navigates to the next question when Next is clicked', () => {
     render(
-      <TestPortal
-        testId="test-1"
-        onTestComplete={() => {}}
-        onCancel={() => {}}
-      />
+      <TestPortal questions={mockQuestions} onTestComplete={mockOnTestComplete} />
     );
 
-    await waitFor(() => {
-      const prevButton = screen.getByText('Previous');
-      expect(prevButton).toBeDisabled();
-    });
+    fireEvent.click(screen.getByRole('button', { name: /next question/i }));
+    expect(screen.getByText('What is the speed limit in a school zone?')).toBeInTheDocument();
+    expect(screen.getByText('Question 2 of 2')).toBeInTheDocument();
   });
 
-  test('navigates to next question', async () => {
+  it('navigates back to the previous question when Previous is clicked', () => {
     render(
-      <TestPortal
-        testId="test-1"
-        onTestComplete={() => {}}
-        onCancel={() => {}}
-      />
+      <TestPortal questions={mockQuestions} onTestComplete={mockOnTestComplete} />
     );
 
-    await waitFor(() => {
-      expect(screen.getByText('Q1')).toBeInTheDocument();
-    });
-
-    fireEvent.click(screen.getByText('Next'));
-
-    await waitFor(() => {
-      expect(screen.getByText('Q2')).toBeInTheDocument();
-      expect(screen.getByText(/Question 2 of 2/)).toBeInTheDocument();
-    });
+    fireEvent.click(screen.getByRole('button', { name: /next question/i }));
+    fireEvent.click(screen.getByRole('button', { name: /previous question/i }));
+    expect(screen.getByText('What does a red traffic light mean?')).toBeInTheDocument();
   });
 
-  test('calls onCancel when Cancel Test is clicked', async () => {
-    const mockOnCancel = jest.fn();
+  it('disables the Previous button on the first question', () => {
     render(
-      <TestPortal
-        testId="test-1"
-        onTestComplete={() => {}}
-        onCancel={mockOnCancel}
-      />
+      <TestPortal questions={mockQuestions} onTestComplete={mockOnTestComplete} />
     );
 
-    await waitFor(() => {
-      expect(screen.getByText('Q1')).toBeInTheDocument();
-    });
+    expect(screen.getByRole('button', { name: /previous question/i })).toBeDisabled();
+  });
 
-    fireEvent.click(screen.getByText('Cancel Test'));
+  it('shows Submit button on the last question', () => {
+    render(
+      <TestPortal questions={mockQuestions} onTestComplete={mockOnTestComplete} />
+    );
 
-    expect(mockOnCancel).toHaveBeenCalled();
+    fireEvent.click(screen.getByRole('button', { name: /next question/i }));
+    expect(screen.getByRole('button', { name: /submit test/i })).toBeInTheDocument();
+  });
+
+  it('captures answer selection', () => {
+    render(
+      <TestPortal questions={mockQuestions} onTestComplete={mockOnTestComplete} />
+    );
+
+    const stopOption = screen.getByLabelText('Answer option: Stop');
+    fireEvent.click(stopOption);
+    expect(stopOption).toBeChecked();
+  });
+
+  it('calls saveProgress and shows ResultsScreen on test completion', () => {
+    const { saveProgress } = require('../../services/storageService');
+
+    render(
+      <TestPortal questions={mockQuestions} onTestComplete={mockOnTestComplete} />
+    );
+
+    // Navigate to last question and submit
+    fireEvent.click(screen.getByRole('button', { name: /next question/i }));
+    fireEvent.click(screen.getByRole('button', { name: /submit test/i }));
+
+    expect(saveProgress).toHaveBeenCalledTimes(1);
+    expect(screen.getByText('Test Complete!')).toBeInTheDocument();
   });
 });
