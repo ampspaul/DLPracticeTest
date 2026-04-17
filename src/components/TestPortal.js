@@ -1,44 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import './TestPortal.css';
 import Question from './Question';
 import ResultsScreen from './ResultsScreen';
-import { loadTestQuestions } from '../services/questionsService';
-import { saveTestAttempt, loadTestAttempts } from '../services/storageService';
+import { saveProgress } from '../services/storageService';
 
-function TestPortal({ testId, onTestComplete, onCancel }) {
-  const [questions, setQuestions] = useState([]);
+function TestPortal({ questions, onTestComplete }) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [userAnswers, setUserAnswers] = useState({});
+  const [answers, setAnswers] = useState({});
   const [testComplete, setTestComplete] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const loadTest = async () => {
-      try {
-        const loadedQuestions = await loadTestQuestions(testId);
-        setQuestions(loadedQuestions);
-        setLoading(false);
-      } catch (error) {
-        console.error('Failed to load test:', error);
-        setLoading(false);
-      }
-    };
+    if (!Array.isArray(questions) || questions.length === 0) {
+      setError('No questions available');
+    }
+  }, [questions]);
 
-    loadTest();
-  }, [testId]);
-
-  const handleAnswerSelect = (answer) => {
-    setUserAnswers((prev) => ({
-      ...prev,
-      [currentQuestionIndex]: answer,
-    }));
+  const handleAnswerSelect = (questionId, selectedAnswer) => {
+    try {
+      setAnswers(prev => ({
+        ...prev,
+        [questionId]: selectedAnswer
+      }));
+    } catch (err) {
+      setError('Failed to save answer');
+      console.error('Error saving answer:', err);
+    }
   };
 
   const handleNext = () => {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      handleCompleteTest();
+      completeTest();
     }
   };
 
@@ -48,106 +41,89 @@ function TestPortal({ testId, onTestComplete, onCancel }) {
     }
   };
 
-  const handleCompleteTest = () => {
-    const results = calculateResults();
-    saveTestAttempt(testId, userAnswers, results, questions);
-    setTestComplete(true);
-    onTestComplete(results);
+  const completeTest = () => {
+    try {
+      saveProgress(answers);
+      setTestComplete(true);
+    } catch (err) {
+      setError('Failed to save test results');
+      console.error('Error completing test:', err);
+    }
   };
 
-  const calculateResults = () => {
-    let correctCount = 0;
-    questions.forEach((question, index) => {
-      if (userAnswers[index] === question.correctAnswer) {
-        correctCount++;
-      }
-    });
-
-    const percentage = Math.round((correctCount / questions.length) * 100);
-    return {
-      testId,
-      score: correctCount,
-      total: questions.length,
-      percentage,
-      timestamp: new Date().toISOString(),
-    };
-  };
-
-  if (loading) {
+  if (error) {
     return (
-      <div className="test-portal">
-        <div className="loading">
-          <p>Loading test...</p>
-        </div>
+      <div className="container">
+        <div className="error" role="alert">{error}</div>
+        <button onClick={onTestComplete}>Return to Home</button>
+      </div>
+    );
+  }
+
+  if (!Array.isArray(questions) || questions.length === 0) {
+    return (
+      <div className="container">
+        <div className="error" role="alert">No questions available</div>
+        <button onClick={onTestComplete}>Return to Home</button>
       </div>
     );
   }
 
   if (testComplete) {
-    const results = calculateResults();
     return (
       <ResultsScreen
         questions={questions}
-        userAnswers={userAnswers}
-        results={results}
-        onBack={onCancel}
+        answers={answers}
+        onReturnHome={onTestComplete}
       />
     );
   }
 
   const currentQuestion = questions[currentQuestionIndex];
-  const progress = {
-    current: currentQuestionIndex + 1,
-    total: questions.length,
-  };
+  const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
 
   return (
-    <div className="test-portal">
-      <div className="test-container">
-        <div className="test-header">
-          <h1>Practice Test</h1>
-          <div className="progress-info">
-            <span>Question {progress.current} of {progress.total}</span>
-            <div className="progress-bar">
-              <div
-                className="progress-fill"
-                style={{ width: `${(progress.current / progress.total) * 100}%` }}
-              ></div>
-            </div>
-          </div>
+    <div className="container">
+      <div style={{ marginBottom: '20px' }}>
+        <p style={{ color: '#666', marginBottom: '10px' }}>
+          Question {currentQuestionIndex + 1} of {questions.length}
+        </p>
+        <div style={{
+          width: '100%',
+          height: '8px',
+          backgroundColor: '#e0e0e0',
+          borderRadius: '4px',
+          overflow: 'hidden'
+        }}>
+          <div style={{
+            width: `${progress}%`,
+            height: '100%',
+            backgroundColor: '#667eea',
+            transition: 'width 0.3s ease'
+          }}></div>
         </div>
+      </div>
 
-        <div className="test-content">
-          {currentQuestion && (
-            <Question
-              question={currentQuestion}
-              questionNumber={currentQuestionIndex + 1}
-              selectedAnswer={userAnswers[currentQuestionIndex]}
-              onAnswerSelect={handleAnswerSelect}
-            />
-          )}
-        </div>
+      <Question
+        question={currentQuestion}
+        selected={answers[currentQuestion.id] || null}
+        onSelectAnswer={(answer) => handleAnswerSelect(currentQuestion.id, answer)}
+      />
 
-        <div className="test-controls">
-          <button
-            onClick={handlePrevious}
-            disabled={currentQuestionIndex === 0}
-            className="btn-secondary"
-          >
-            Previous
-          </button>
-
-          <button onClick={onCancel} className="btn-cancel">
-            Cancel Test
-          </button>
-
-          <button
-            onClick={handleNext}
-            className="btn-primary"
-          >
-            {currentQuestionIndex === questions.length - 1 ? 'Finish' : 'Next'}
-          </button>
-        </div>
+      <div className="button-group">
+        <button
+          onClick={handlePrevious}
+          disabled={currentQuestionIndex === 0}
+          aria-label="Previous question"
+        >
+          Previous
+        </button>
+        <button
+          onClick={handleNext}
+          aria-label={currentQuestionIndex === questions.length - 1 ? 'Submit test' : 'Next question'}
+        >
+          {currentQuestionIndex === questions.length - 1 ? 'Submit' : 'Next'}
+        </button>
       </div>
     </div>
   );

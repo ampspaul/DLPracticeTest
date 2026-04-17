@@ -1,43 +1,25 @@
 import React from 'react';
-import './HomePage.css';
 
 function HomePage({ onStartTest }) {
-  const tests = [
-    { id: 'permit-knowledge', title: 'Permit Knowledge Test', questions: 50 },
-    { id: 'road-signs', title: 'Road Signs & Signals', questions: 30 },
-    { id: 'traffic-laws', title: 'Traffic Laws & Rules', questions: 40 },
-  ];
-
   return (
-    <div className="home-page">
-      <div className="home-content">
-        <h1>Driver License Practice Tests</h1>
-        <p className="subtitle">Master the road with our comprehensive practice tests</p>
-
-        <div className="tests-grid">
-          {tests.map((test) => (
-            <div key={test.id} className="test-card">
-              <h2>{test.title}</h2>
-              <p className="question-count">{test.questions} Questions</p>
-              <button
-                onClick={() => onStartTest(test.id)}
-                className="btn-start-test"
-              >
-                Start Test
-              </button>
-            </div>
-          ))}
-        </div>
-
-        <div className="info-section">
-          <h3>How It Works</h3>
-          <ol>
-            <li>Select a practice test from the options above</li>
-            <li>Answer each question one at a time</li>
-            <li>Review your answers after completion</li>
-            <li>Your score and progress are saved automatically</li>
-          </ol>
-        </div>
+    <div className="container">
+      <h1>Driver License Practice Test</h1>
+      <p>
+        Welcome to the Driver License Practice Test Portal. This application
+        helps you prepare for your driver license exam by providing practice
+        questions covering key topics.
+      </p>
+      <h3>How to Use:</h3>
+      <ol style={{ paddingLeft: '20px', color: '#666', lineHeight: '1.8' }}>
+        <li>Click the button below to start the test</li>
+        <li>Read each question carefully and select your answer</li>
+        <li>Your progress is automatically saved</li>
+        <li>Review your results and score at the end</li>
+      </ol>
+      <div className="button-group">
+        <button onClick={onStartTest} aria-label="Start the test">
+          Start Test
+        </button>
       </div>
     </div>
   );

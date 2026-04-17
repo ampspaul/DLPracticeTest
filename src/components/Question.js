@@ -1,33 +1,49 @@
 import React from 'react';
-import './Question.css';
 
-function Question({ question, questionNumber, selectedAnswer, onAnswerSelect }) {
+function Question({ question, selected, onSelectAnswer }) {
+  if (!question) {
+    return <div className="error">Question not found</div>;
+  }
+
+  const { id, text, options } = question;
+
   return (
-    <div className="question">
-      <div className="question-header">
-        <h2 className="question-text">{question.text}</h2>
-        {question.hint && <p className="question-hint">💡 Hint: {question.hint}</p>}
-      </div>
-
-      <div className="answer-options">
-        {question.options.map((option, index) => (
-          <label
-            key={index}
-            className={`answer-option ${
-              selectedAnswer === option ? 'selected' : ''
-            }`}
-          >
-            <input
-              type="radio"
-              name={`question-${questionNumber}`}
-              value={option}
-              checked={selectedAnswer === option}
-              onChange={() => onAnswerSelect(option)}
-            />
-            <span className="option-text">{option}</span>
-          </label>
-        ))}
-      </div>
+    <div style={{ marginBottom: '30px' }}>
+      <h2 style={{ marginBottom: '20px', fontSize: '1.3rem', color: '#333' }}>
+        {text}
+      </h2>
+      <fieldset style={{ border: 'none', padding: 0 }}>
+        <legend style={{ display: 'none' }}>Select an answer</legend>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          {Array.isArray(options) && options.map((option, index) => (
+            <label
+              key={index}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                padding: '12px',
+                border: '2px solid #e0e0e0',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                backgroundColor: selected === option ? '#f0f4ff' : 'white',
+                borderColor: selected === option ? '#667eea' : '#e0e0e0',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              <input
+                type="radio"
+                name={`question-${id}`}
+                value={option}
+                checked={selected === option}
+                onChange={() => onSelectAnswer(option)}
+                style={{ marginRight: '12px', cursor: 'pointer' }}
+                aria-label={`Answer option: ${option}`}
+              />
+              <span style={{ flex: 1, color: '#333' }}>{option}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
     </div>
   );
 }

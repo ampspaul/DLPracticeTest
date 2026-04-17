@@ -1,79 +1,57 @@
-import React from 'react';
-import './ResultsScreen.css';
+import React, { useMemo } from 'react';
 
-function ResultsScreen({ questions, userAnswers, results, onBack }) {
-  const getAnswerStatus = (index) => {
-    const userAnswer = userAnswers[index];
-    const correctAnswer = questions[index].correctAnswer;
-    return userAnswer === correctAnswer ? 'correct' : 'incorrect';
-  };
+function ResultsScreen({ questions, answers, onReturnHome }) {
+  const results = useMemo(() => {
+    if (!Array.isArray(questions) || typeof answers !== 'object' || !answers) {
+      return { score: 0, total: 0, percentage: 0 };
+    }
 
-  const isPassing = results.percentage >= 70;
+    let correctCount = 0;
+    questions.forEach(question => {
+      if (question && question.id && question.correctAnswer) {
+        if (answers[question.id] === question.correctAnswer) {
+          correctCount++;
+        }
+      }
+    });
+
+    const total = questions.length;
+    const percentage = total > 0 ? Math.round((correctCount / total) * 100) : 0;
+
+    return {
+      score: correctCount,
+      total: total,
+      percentage: percentage
+    };
+  }, [questions, answers]);
 
   return (
-    <div className="results-screen">
-      <div className="results-wrapper">
-        <div className="results-header">
-          <h1>Test Complete!</h1>
-          <div className={`results-badge ${isPassing ? 'pass' : 'fail'}`}>
-            {isPassing ? '✓ Passed' : '✗ Failed'}
-          </div>
-        </div>
+    <div className="container">
+      <h1>Test Complete!</h1>
+      <div className="success">
+        <h2>Your Results</h2>
+        <p style={{ fontSize: '1.1rem', color: '#333' }}>
+          Score: <strong>{results.score} out of {results.total}</strong>
+        </p>
+        <p style={{ fontSize: '1.3rem', color: '#667eea', fontWeight: 'bold' }}>
+          {results.percentage}%
+        </p>
+      </div>
 
-        <div className="results-summary">
-          <div className="score-box">
-            <div className="score-number">{results.score}</div>
-            <div className="score-label">Correct Answers</div>
-            <div className="score-total">out of {results.total}</div>
-          </div>
+      <div style={{ marginBottom: '30px' }}>
+        <h3>Performance Summary</h3>
+        <p>
+          {results.percentage >= 80
+            ? '✓ Excellent! You are well-prepared for the exam.'
+            : results.percentage >= 60
+            ? '◐ Good! Review the areas where you need improvement.'
+            : '✗ Keep practicing! Focus on the challenging topics.'}
+        </p>
+      </div>
 
-          <div className="percentage-box">
-            <div className="percentage-number">{results.percentage}%</div>
-            <div className="percentage-label">Score</div>
-          </div>
-        </div>
-
-        <div className="review-section">
-          <h2>Answer Review</h2>
-          <div className="answers-list">
-            {questions.map((question, index) => {
-              const status = getAnswerStatus(index);
-              const userAnswer = userAnswers[index];
-
-              return (
-                <div key={index} className={`answer-review ${status}`}>
-                  <div className="answer-review-header">
-                    <span className="question-number">Q{index + 1}</span>
-                    <span className={`status-badge ${status}`}>
-                      {status === 'correct' ? '✓ Correct' : '✗ Incorrect'}
-                    </span>
-                  </div>
-
-                  <p className="review-question">{question.text}</p>
-
-                  <div className="review-answers">
-                    <div className="your-answer">
-                      <strong>Your answer:</strong> {userAnswer || 'Not answered'}
-                    </div>
-                    {status === 'incorrect' && (
-                      <div className="correct-answer">
-                        <strong>Correct answer:</strong> {question.correctAnswer}
-                      </div>
-                    )}
-                    {question.explanation && (
-                      <div className="explanation">
-                        <strong>Explanation:</strong> {question.explanation}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        <button onClick={onBack} className="btn-return-home">
-          Back to Home
+      <div className="button-group">
+        <button onClick={onReturnHome} aria-label="Return to home page">
+          Return to Home
         </button>
       </div>
     </div>
