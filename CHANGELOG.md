@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Driver License Practice Test Portal - ReactJS web application for practice tests
+- PortalHeading component displaying prominent application header with text 'TN Driver Licence Practice Test'
+  - Semantic HTML heading tags for accessibility
+  - Responsive design for mobile, tablet, and desktop devices
+  - Integrated with App component in application header
+  - PortalHeading.css with consistent styling aligned to App.css theme
+  - Unit tests in PortalHeading.test.jsx ensuring component functionality and accessibility
+  - WCAG-compliant screen reader support
 - HomePage component for test selection and initialization
 - TestPortal component displaying one question at a time with answer tracking
 - Question component for rendering individual questions with multiple-choice options
@@ -20,3 +27,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for localStorage persistence of test data and user scores
 - Public/index.html entry point for React application
 - Comprehensive project documentation in README.md
+- Accessibility standards documentation covering WCAG compliance and semantic markup
