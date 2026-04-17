@@ -1,0 +1,249 @@
+.results-screen {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.results-wrapper {
+  width: 100%;
+  max-width: 900px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.results-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.results-header h1 {
+  margin: 0 0 20px 0;
+  font-size: 2.5rem;
+}
+
+.results-badge {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.results-badge.pass {
+  background: #4ade80;
+  color: white;
+}
+
+.results-badge.fail {
+  background: #ef4444;
+  color: white;
+}
+
+.results-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  padding: 40px 20px;
+  background: #f9f9f9;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.score-box,
+.percentage-box {
+  text-align: center;
+}
+
+.score-number,
+.percentage-number {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #667eea;
+  margin: 0;
+}
+
+.score-label,
+.percentage-label {
+  font-size: 0.95rem;
+  color: #666;
+  margin-top: 5px;
+}
+
+.score-total {
+  font-size: 0.9rem;
+  color: #999;
+  margin-top: 5px;
+}
+
+.review-section {
+  padding: 40px 20px;
+}
+
+.review-section h2 {
+  margin-top: 0;
+  margin-bottom: 25px;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+.answers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.answer-review {
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.answer-review.correct {
+  border-color: #4ade80;
+  background: #f0fdf4;
+}
+
+.answer-review.incorrect {
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+
+.answer-review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.question-number {
+  font-weight: 700;
+  color: #667eea;
+  font-size: 0.9rem;
+}
+
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.status-badge.correct {
+  background: #4ade80;
+  color: white;
+}
+
+.status-badge.incorrect {
+  background: #ef4444;
+  color: white;
+}
+
+.review-question {
+  margin: 0 0 15px 0;
+  color: #333;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.review-answers {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.review-answers strong {
+  color: #333;
+  font-weight: 600;
+}
+
+.your-answer {
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 4px;
+}
+
+.correct-answer {
+  padding: 10px;
+  background: rgba(74, 222, 128, 0.1);
+  border-left: 3px solid #4ade80;
+  border-radius: 4px;
+}
+
+.explanation {
+  padding: 10px;
+  background: rgba(102, 126, 234, 0.1);
+  border-left: 3px solid #667eea;
+  border-radius: 4px;
+  font-style: italic;
+}
+
+.btn-return-home {
+  display: block;
+  margin: 30px auto;
+  background-color: #667eea;
+  color: white;
+  padding: 14px 40px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-return-home:hover {
+  background-color: #764ba2;
+}
+
+@media (max-width: 768px) {
+  .results-screen {
+    padding: 10px;
+  }
+
+  .results-header {
+    padding: 25px 15px;
+  }
+
+  .results-header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+
+  .results-summary {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 25px 15px;
+  }
+
+  .score-number,
+  .percentage-number {
+    font-size: 2.2rem;
+  }
+
+  .review-section {
+    padding: 25px 15px;
+  }
+
+  .review-section h2 {
+    font-size: 1.2rem;
+  }
+
+  .answer-review {
+    padding: 15px;
+  }
+
+  .btn-return-home {
+    width: calc(100% - 20px);
+    margin: 20px 10px;
+  }
+}
