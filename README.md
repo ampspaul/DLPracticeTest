@@ -4,13 +4,14 @@ A ReactJS-based web portal for driver license practice tests, enabling users to 
 
 ## Features
 
-- **Multiple-Choice Questions**: Practice tests with various question types and answer options
-- **Progress Tracking**: Real-time display of current question number and total question count
+- **Multiple-Choice Questions**: Practice tests with 50+ question options covering various driver license exam topics
+- **Progress Tracking**: Real-time display of current question number and total question count (50+ questions per test)
 - **Response Management**: Track and store user responses for each question during the test
 - **Test Completion**: Comprehensive results summary with scoring information
 - **Answer Review**: Review all answers after test completion
 - **Persistent Storage**: Local storage support for test attempts and scores using `storageService`
 - **Responsive UI**: Clean, user-friendly interface built with React components
+- **Accurate Scoring**: Automated scoring system compatible with question bank structure
 
 ## Architecture
 
@@ -18,13 +19,37 @@ A ReactJS-based web portal for driver license practice tests, enabling users to 
 
 - **App.js**: Main application component managing test state and routing
 - **HomePage.js**: Landing page for test selection and initialization
-- **TestPortal.js**: Main testing interface displaying questions and capturing responses
-- **Question.js**: Individual question component with answer options
-- **ResultsScreen.js**: Results summary and answer review screen
+- **TestPortal.js**: Main testing interface displaying questions and capturing responses, manages 50+ question sequence
+- **Question.js**: Individual question component with answer options (supports 4+ choices)
+- **ResultsScreen.js**: Results summary and answer review screen with score calculation
 
 ### Services
 
-- **storageService.js**: Handles persistent storage of test attempts, user responses, and scores
+- **storageService.js**: Handles persistent storage of test attempts, user responses, and scores. Compatible with expanded question bank of 50+ questions
+
+## Question Bank
+
+The DLPracticeTest includes a comprehensive question bank with **50+ multiple-choice questions**.
+
+### Question Structure
+
+Each question contains:
+- **Question Text**: Clear, specific question about driver license requirements
+- **Answer Options**: Minimum 4 multiple-choice options per question
+- **Correct Answer**: Single marked correct answer per question
+- **Question ID**: Unique identifier for tracking and scoring
+
+### Question Coverage
+
+Questions cover the following topics:
+- Road signs and traffic signals
+- Right-of-way rules
+- Speed limits and safe driving
+- Vehicle control and safety
+- Parking regulations
+- Driving under influence laws
+- Defensive driving techniques
+- And more...
 
 ## Usage
 
@@ -45,9 +70,9 @@ The application will open at `http://localhost:3000`.
 ## Test Workflow
 
 1. User navigates to the home page and selects a practice test
-2. Questions are displayed one at a time in the TestPortal
-3. User selects an answer and navigates to the next question
-4. Progress bar shows current position (e.g., "Question 5 of 50")
+2. Questions are displayed one at a time in the TestPortal (50+ questions total)
+3. User selects an answer from 4+ options and navigates to the next question
+4. Progress bar shows current position (e.g., "Question 5 of 50+")
 5. Upon completion, results are displayed with scoring summary
 6. User can review all answers on the ResultsScreen
 7. Test attempts and scores are persisted for future reference
@@ -56,10 +81,11 @@ The application will open at `http://localhost:3000`.
 
 The `storageService` module provides the following functionality:
 
-- Save test attempts with responses
+- Save test attempts with responses (handles 50+ questions)
 - Retrieve historical test results
 - Store user scores and answer summaries
 - Support for both localStorage and sessionStorage strategies
+- Validate response data structure compatibility with expanded question bank
 
 ## Styling
 
@@ -71,3 +97,20 @@ The application uses CSS modules with `App.css` for consistent theming and respo
 - Firefox (latest)
 - Safari (latest)
 - Edge (latest)
+
+## Development Notes
+
+### Progress Tracking Updates
+
+Progress tracking has been updated to display the expanded question count. Ensure TestPortal component properly initializes with the new total question count from the question bank.
+
+### Scoring Compatibility
+
+The ResultsScreen component uses the marked correct answers from each question to calculate test scores. All 50+ questions must have exactly one answer marked as correct.
+
+### Storage Persistence
+
+When users complete tests, storageService persists:
+- All user responses for the 50+ questions
+- Calculated scores based on correct answer matching
+- Test metadata (timestamp, test ID, user session)
