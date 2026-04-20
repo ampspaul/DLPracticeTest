@@ -27,9 +27,10 @@ function ResultsScreen({ questions, answers, onReturnHome }) {
 
   return (
     <div className="container">
-      <h1>Test Complete!</h1>
+      <h1>US-TN Driver Licence Practice Test</h1>
+      <h2>Test Complete!</h2>
       <div className="success">
-        <h2>Your Results</h2>
+        <h3>Your Results</h3>
         <p style={{ fontSize: '1.1rem', color: '#333' }}>
           Score: <strong>{results.score} out of {results.total}</strong>
         </p>

@@ -4,11 +4,17 @@ import HomePage from './components/HomePage';
 import TestPortal from './components/TestPortal';
 import { getAllQuestions } from './services/storageService';
 
+const APP_TITLE = 'US-TN Driver Licence Practice Test';
+
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [questions, setQuestions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    document.title = APP_TITLE;
+  }, []);
 
   useEffect(() => {
     const loadQuestions = async () => {

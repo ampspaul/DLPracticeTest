@@ -84,7 +84,7 @@ function TestPortal({ questions, onTestComplete }) {
 
   return (
     <div className="container">
-      <h1>TN Driver Licence Practice Test</h1>
+      <h1>US-TN Driver Licence Practice Test</h1>
 
       <div style={{ marginBottom: '20px' }}>
         <p style={{ color: '#666', marginBottom: '10px' }}>
