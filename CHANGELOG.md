@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Page Title & H1 Heading** (`HomePage.js` / `index.html`): The landing page now displays `TN Driver Licence Practice Test` as a prominent `<h1>` page-level heading and sets the browser document `<title>` to the same value so it appears in the browser tab and bookmarks
+  - Title text is exact — no casing, spelling, or punctuation variations permitted
+  - Heading is implemented within the existing ReactJS component structure (primarily `HomePage.js` and/or `index.html` / `App.js`)
+  - Responsive across all supported viewport widths (mobile ≥ 320 px through desktop ≥ 1 024 px)
+  - Satisfies WCAG 2.1 SC 1.3.1 and SC 2.4.6 accessibility requirements via a semantically correct HTML heading element
+  - Improves SEO relevance through matching `<title>` and `<h1>` values
+  - No regression to existing features: question flow, progress tracking, scoring, answer review, or local storage persistence
 - **Expanded Question Bank**: Added 50+ multiple-choice questions covering comprehensive driver license examination topics
   - Road signs and traffic signals (8-10 questions)
   - Right-of-way rules (8-10 questions)

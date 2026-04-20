@@ -12,13 +12,14 @@ A ReactJS-based web portal for driver license practice tests, enabling users to 
 - **Persistent Storage**: Local storage support for test attempts and scores using `storageService`
 - **Responsive UI**: Clean, user-friendly interface built with React components
 - **Accurate Scoring**: Automated scoring system compatible with question bank structure
+- **Page Identity**: Prominent page-level heading and browser tab title — `TN Driver Licence Practice Test` — displayed on the landing page for clarity, accessibility, and SEO
 
 ## Architecture
 
 ### Core Components
 
 - **App.js**: Main application component managing test state and routing
-- **HomePage.js**: Landing page for test selection and initialization
+- **HomePage.js**: Landing page for test selection and initialization. Renders an `<h1>` heading with the exact text `TN Driver Licence Practice Test` and sets the browser document `<title>` to the same value so the title appears correctly in the browser tab and in search engine results
 - **TestPortal.js**: Main testing interface displaying questions and capturing responses, manages 50+ question sequence
 - **Question.js**: Individual question component with answer options (supports 4+ choices)
 - **ResultsScreen.js**: Results summary and answer review screen with score calculation
@@ -69,13 +70,14 @@ The application will open at `http://localhost:3000`.
 
 ## Test Workflow
 
-1. User navigates to the home page and selects a practice test
-2. Questions are displayed one at a time in the TestPortal (50+ questions total)
-3. User selects an answer from 4+ options and navigates to the next question
-4. Progress bar shows current position (e.g., "Question 5 of 50+")
-5. Upon completion, results are displayed with scoring summary
-6. User can review all answers on the ResultsScreen
-7. Test attempts and scores are persisted for future reference
+1. User navigates to the home page — the browser tab shows **TN Driver Licence Practice Test** and the page displays a prominent `<h1>` heading with the same text
+2. User selects a practice test from the HomePage
+3. Questions are displayed one at a time in the TestPortal (50+ questions total)
+4. User selects an answer from 4+ options and navigates to the next question
+5. Progress bar shows current position (e.g., "Question 5 of 50+")
+6. Upon completion, results are displayed with scoring summary
+7. User can review all answers on the ResultsScreen
+8. Test attempts and scores are persisted for future reference
 
 ## Storage
 
@@ -99,6 +101,23 @@ The application uses CSS modules with `App.css` for consistent theming and respo
 - Edge (latest)
 
 ## Development Notes
+
+### Page Title & Heading (HomePage.js / index.html)
+
+The landing page (`HomePage.js`) must display the exact text **`TN Driver Licence Practice Test`** in two places:
+
+| Location | Implementation | Requirement |
+|---|---|---|
+| Browser tab / bookmark | `<title>` tag in `index.html` or `document.title` set in `HomePage.js` | Exact string, no casing/punctuation variation |
+| Page-level heading | `<h1>` (or semantic equivalent) rendered by `HomePage.js` | Exact string, WCAG-compliant, SEO-friendly |
+
+**Responsiveness**: The `<h1>` heading must render correctly across all supported viewport widths — mobile (≥ 320 px) through desktop (≥ 1 024 px). Use fluid typography or CSS media queries as appropriate.
+
+**Accessibility**: A visible, correctly-ordered `<h1>` is required by WCAG 2.1 Success Criterion 1.3.1 (Info and Relationships) and SC 2.4.6 (Headings and Labels). Screen readers rely on this landmark to announce the page context.
+
+**SEO**: The matching `<title>` and `<h1>` values improve search-engine relevance signals for the page.
+
+**Regression guard**: Adding the heading and title must not alter component props, state shape, routing logic, question flow, progress tracking, scoring, answer review, or `storageService` behaviour.
 
 ### Progress Tracking Updates
 
