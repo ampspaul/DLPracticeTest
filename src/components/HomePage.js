@@ -3,13 +3,13 @@ import React from 'react';
 function HomePage({ onStartTest }) {
   return (
     <div className="container">
-      <h1>Driver License Practice Test</h1>
+      <h1>US-TN Driver Licence Practice Test</h1>
       <p>
-        Welcome to the Driver License Practice Test Portal. This application
-        helps you prepare for your driver license exam by providing practice
+        Welcome to the US-TN Driver Licence Practice Test Portal. This application
+        helps you prepare for your driver licence exam by providing practice
         questions covering key topics.
       </p>
-      <h3>How to Use:</h3>
+      <h2>How to Use:</h2>
       <ol style={{ paddingLeft: '20px', color: '#666', lineHeight: '1.8' }}>
         <li>Click the button below to start the test</li>
         <li>Read each question carefully and select your answer</li>
