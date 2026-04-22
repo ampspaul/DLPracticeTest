@@ -1,0 +1,236 @@
+/* ============================================================
+   TN-DL Practice Test — Page Styles
+   ============================================================ */
+
+.tn-dl-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #1a1a2e;
+}
+
+/* Header */
+.tn-dl-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 3px solid #003f87; /* Tennessee blue */
+}
+
+.tn-dl-title {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700;
+  color: #003f87;
+  margin: 0 0 0.5rem;
+}
+
+.tn-dl-subtitle {
+  font-size: 1rem;
+  color: #555;
+  margin: 0;
+}
+
+/* Progress bar */
+.tn-dl-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.4rem;
+}
+
+.tn-dl-progress-fill {
+  height: 100%;
+  background: #003f87;
+  transition: width 0.3s ease;
+}
+
+.tn-dl-progress-label {
+  font-size: 0.875rem;
+  color: #666;
+  margin: 0 0 1.25rem;
+}
+
+/* Question card */
+.tn-dl-question-card {
+  background: #fff;
+  border: 1px solid #d0d7e2;
+  border-radius: 10px;
+  padding: 1.75rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.tn-dl-question-text {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-weight: 600;
+  margin: 0 0 1.25rem;
+  line-height: 1.5;
+}
+
+/* Options */
+.tn-dl-options {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.tn-dl-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  width: 100%;
+  text-align: left;
+  padding: 0.875rem 1rem;
+  border: 2px solid #c5cfe0;
+  border-radius: 8px;
+  background: #f7f9fc;
+  font-size: 0.975rem;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.tn-dl-option:hover:not(:disabled) {
+  border-color: #003f87;
+  background: #eef3fb;
+}
+
+.tn-dl-option:disabled {
+  cursor: default;
+}
+
+.tn-dl-option--correct {
+  border-color: #1a7a4a;
+  background: #e6f5ed;
+  color: #1a7a4a;
+  font-weight: 600;
+}
+
+.tn-dl-option--incorrect {
+  border-color: #c0392b;
+  background: #fdecea;
+  color: #c0392b;
+  font-weight: 600;
+}
+
+.tn-dl-option--disabled {
+  opacity: 0.5;
+}
+
+.tn-dl-option-letter {
+  font-weight: 700;
+  min-width: 1.5rem;
+  flex-shrink: 0;
+}
+
+/* Explanation */
+.tn-dl-explanation {
+  background: #f0f4ff;
+  border-left: 4px solid #003f87;
+  border-radius: 4px;
+  padding: 0.875rem 1rem;
+  font-size: 0.925rem;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+/* Next button */
+.tn-dl-next-btn {
+  display: block;
+  width: 100%;
+  padding: 0.875rem;
+  background: #003f87;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.tn-dl-next-btn:hover {
+  background: #002d63;
+}
+
+/* Results */
+.tn-dl-results-section {
+  display: flex;
+  justify-content: center;
+}
+
+.tn-dl-results-card {
+  background: #fff;
+  border: 1px solid #d0d7e2;
+  border-radius: 10px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  max-width: 480px;
+  width: 100%;
+}
+
+.tn-dl-results-heading {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #003f87;
+  margin: 0 0 1rem;
+}
+
+.tn-dl-results-verdict {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+}
+
+.tn-dl-results-verdict--pass {
+  color: #1a7a4a;
+}
+
+.tn-dl-results-verdict--fail {
+  color: #c0392b;
+}
+
+.tn-dl-results-score {
+  font-size: 1.5rem;
+  margin: 0 0 0.75rem;
+}
+
+.tn-dl-results-note {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0 0 1.5rem;
+}
+
+.tn-dl-restart-btn {
+  padding: 0.875rem 2rem;
+  background: #003f87;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.tn-dl-restart-btn:hover {
+  background: #002d63;
+}
+
+/* ============================================================
+   Responsive — mobile
+   ============================================================ */
+@media (max-width: 600px) {
+  .tn-dl-question-card {
+    padding: 1.25rem 1rem;
+  }
+
+  .tn-dl-results-card {
+    padding: 1.75rem 1rem;
+  }
+}
