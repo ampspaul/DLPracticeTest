@@ -1,0 +1,45 @@
+.app-header {
+  background-color: #003366;
+  color: #ffffff;
+  padding: 16px 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .header-title {
+    font-size: 1.5rem;
+  }
+
+  .app-header {
+    padding: 12px 16px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .header-title {
+    font-size: 1.2rem;
+  }
+
+  .app-header {
+    padding: 10px 12px;
+  }
+}
