@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login — MyApp</title>
+  <link rel="stylesheet" href="styles/login.css" />
+</head>
+<body>
+  <main class="login-container" role="main">
+    <div class="login-card">
+      <div class="login-header">
+        <img src="assets/logo.svg" alt="MyApp Logo" class="login-logo" width="120" height="40" />
+        <h1 class="login-title">Sign in to your account</h1>
+      </div>
+
+      <!-- AC8: server-side error banner -->
+      <div
+        id="login-error-banner"
+        class="alert alert--error"
+        role="alert"
+        aria-live="assertive"
+        hidden
+      >
+        <span id="login-error-message"></span>
+      </div>
+
+      <!-- AC12: CSRF token injected by server -->
+      <form
+        id="login-form"
+        class="login-form"
+        method="POST"
+        action="/api/auth/login"
+        novalidate
+        aria-label="Login form"
+      >
+        <input type="hidden" id="csrf-token" name="csrf_token" value="" />
+
+        <!-- AC1: Email field -->
+        <div class="form-group" id="email-group">
+          <label class="form-label" for="email">
+            Email address
+            <span class="required" aria-hidden="true">*</span>
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="form-input"
+            autocomplete="username"
+            autocapitalize="none"
+            spellcheck="false"
+            required
+            aria-required="true"
+            aria-describedby="email-error"
+            placeholder="you@example.com"
+          />
+          <span id="email-error" class="field-error" role="alert" aria-live="polite" hidden></span>
+        </div>
+
+        <!-- AC1: Password field  AC3: masked by default -->
+        <div class="form-group" id="password-group">
+          <label class="form-label" for="password">
+            Password
+            <span class="required" aria-hidden="true">*</span>
+          </label>
+          <div class="input-wrapper">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-input"
+              autocomplete="current-password"
+              required
+              aria-required="true"
+              aria-describedby="password-error"
+              placeholder="Enter your password"
+            />
+            <!-- AC4: Show/hide password toggle -->
+            <button
+              type="button"
+              id="toggle-password"
+              class="toggle-password"
+              aria-label="Show password"
+              aria-controls="password"
+              aria-pressed="false"
+            >
+              <svg class="icon icon--eye" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+              <svg class="icon icon--eye-off" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20" style="display:none">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                <line x1="1" y1="1" x2="23" y2="23"/>
+              </svg>
+            </button>
+          </div>
+          <span id="password-error" class="field-error" role="alert" aria-live="polite" hidden></span>
+        </div>
+
+        <!-- AC10: Remember me -->
+        <div class="form-group form-group--inline">
+          <label class="checkbox-label" for="remember-me">
+            <input
+              type="checkbox"
+              id="remember-me"
+              name="remember_me"
+              class="checkbox-input"
+              value="true"
+            />
+            <span class="checkbox-custom" aria-hidden="true"></span>
+            Remember me for 30 days
+          </label>
+        </div>
+
+        <!-- AC5: Submit button disabled until valid  AC6: loading state -->
+        <button
+          type="submit"
+          id="submit-btn"
+          class="btn btn--primary btn--full"
+          disabled
+          aria-disabled="true"
+        >
+          <span class="btn-text">Sign in</span>
+          <span class="btn-spinner" aria-hidden="true" hidden>
+            <svg class="spinner" viewBox="0 0 24 24" width="20" height="20" aria-label="Loading">
+              <circle cx="12" cy="12" r="10" fill="none" stroke-width="3"/>
+            </svg>
+          </span>
+        </button>
+      </form>
+
+      <!-- AC11: Forgot password link -->
+      <div class="login-footer">
+        <a href="/forgot-password" class="link" id="forgot-password-link">
+          Forgot your password?
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <script src="auth.js"></script>
+</body>
+</html>
