@@ -18,7 +18,7 @@ A ReactJS-based web portal for driver license practice tests, enabling users to 
 ### Core Components
 
 - **App.js**: Main application component managing test state and routing
-- **HomePage.js**: Landing page for test selection and initialization
+- **HomePage.js**: Landing page for test selection and initialization. Displays the main page heading **'TN Student Practice Test'**, styled with bold font weight (`font-weight: 700`) and blue text colour. The heading style is applied consistently across all supported viewports (desktop, tablet, and mobile) to preserve responsive behaviour. No other text, layout, navigation, or functional behaviour is affected by this styling.
 - **TestPortal.js**: Main testing interface displaying questions and capturing responses, manages 50+ question sequence
 - **Question.js**: Individual question component with answer options (supports 4+ choices)
 - **ResultsScreen.js**: Results summary and answer review screen with score calculation
@@ -91,6 +91,19 @@ The `storageService` module provides the following functionality:
 
 The application uses CSS modules with `App.css` for consistent theming and responsive design.
 
+### Home Page Heading
+
+The main heading on `HomePage.js` renders the text **'TN Student Practice Test'** with the following styles:
+
+| Property | Value |
+|---|---|
+| Text | `TN Student Practice Test` |
+| `font-weight` | `bold` / `700` |
+| `color` | Blue (exact hex/design token to be confirmed with stakeholder) |
+| Responsive | Applied consistently across desktop, tablet, and mobile viewports |
+
+> ⚠️ **Stakeholder action required**: The exact blue shade, hex value, or design token for the heading colour has not yet been confirmed. Update this table and the corresponding CSS once the colour is agreed.
+
 ## Browser Support
 
 - Chrome (latest)
@@ -114,3 +127,7 @@ When users complete tests, storageService persists:
 - All user responses for the 50+ questions
 - Calculated scores based on correct answer matching
 - Test metadata (timestamp, test ID, user session)
+
+### Home Page Heading Style
+
+The heading style in `HomePage.js` is intentionally scoped to the `h1` / main heading element only. No other text, layout elements, navigation links, or functional behaviour on the home page are modified. When updating the heading colour once the stakeholder confirms the exact shade, change only the heading-specific CSS rule and verify the change renders correctly at desktop (≥1024 px), tablet (768 px–1023 px), and mobile (<768 px) breakpoints.
