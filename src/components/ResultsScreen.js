@@ -1,5 +1,8 @@
 import React, { useMemo } from 'react';
-import AppHeading from './AppHeading';
+import PropTypes from 'prop-types';
+
+const PASS_THRESHOLD_EXCELLENT = 80;
+const PASS_THRESHOLD_GOOD = 60;
 
 function ResultsScreen({ questions, answers, onReturnHome }) {
   const results = useMemo(() => {
@@ -21,55 +24,81 @@ function ResultsScreen({ questions, answers, onReturnHome }) {
 
     return {
       score: correctCount,
-      total: total,
-      percentage: percentage,
+      total,
+      percentage
     };
   }, [questions, answers]);
 
+  const getPerformanceMessage = (percentage) => {
+    if (percentage >= PASS_THRESHOLD_EXCELLENT) {
+      return '✓ Excellent! You are well-prepared for the exam.';
+    }
+    if (percentage >= PASS_THRESHOLD_GOOD) {
+      return '◐ Good! Review the areas where you made mistakes before taking the real test.';
+    }
+    return '✗ Keep practising. Study the handbook and try again.';
+  };
+
+  const getPerformanceClassName = (percentage) => {
+    if (percentage >= PASS_THRESHOLD_EXCELLENT) return 'performance-excellent';
+    if (percentage >= PASS_THRESHOLD_GOOD) return 'performance-good';
+    return 'performance-poor';
+  };
+
   return (
-    <div className="container">
-      <AppHeading />
+    <div className="container" data-testid="results-screen">
+      <h1>US-TN Driver Licence Practice Test</h1>
       <h2>Test Complete!</h2>
-      <div className="success">
+      <div
+        className="success"
+        role="region"
+        aria-label="Test results"
+        data-testid="results-summary"
+      >
         <h3>Your Results</h3>
-        <p style={{ fontSize: '1.1rem', color: '#333' }}>
+        <p className="results-score">
           Score: <strong>{results.score} out of {results.total}</strong>
         </p>
-        <p style={{ fontSize: '1.3rem', color: '#667eea', fontWeight: 'bold' }}>
+        <p className="results-percentage" data-testid="results-percentage">
           {results.percentage}%
         </p>
       </div>
 
-      <div style={{ marginBottom: '30px' }}>
+      <div className="performance-summary" data-testid="performance-summary">
         <h3>Performance Summary</h3>
-        <p>
-          {results.percentage >= 80
-            ? '✓ Excellent! You are well-prepared for the exam.'
-            : results.percentage >= 60
-            ? '◐ Good! Review the areas where you struggled before the real exam.'
-            : '✗ More practice needed. Review the material and try again.'}
+        <p
+          className={getPerformanceClassName(results.percentage)}
+          data-testid="performance-message"
+        >
+          {getPerformanceMessage(results.percentage)}
         </p>
       </div>
 
-      {onReturnHome && (
-        <button
-          onClick={onReturnHome}
-          style={{
-            padding: '0.75rem 2rem',
-            fontSize: '1rem',
-            backgroundColor: '#2e7d32',
-            color: '#fff',
-            border: 'none',
-            borderRadius: '6px',
-            cursor: 'pointer',
-            fontWeight: 700,
-          }}
-        >
-          Return Home
-        </button>
-      )}
+      <button
+        onClick={onReturnHome}
+        className="btn btn-primary"
+        aria-label="Return to home screen"
+        data-testid="return-home-button"
+      >
+        Return Home
+      </button>
     </div>
   );
 }
+
+ResultsScreen.propTypes = {
+  questions: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      correctAnswer: PropTypes.string
+    })
+  ).isRequired,
+  answers: PropTypes.objectOf(PropTypes.string).isRequired,
+  onReturnHome: PropTypes.func
+};
+
+ResultsScreen.defaultProps = {
+  onReturnHome: null
+};
 
 export default ResultsScreen;

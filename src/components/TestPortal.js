@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import Question from './Question';
 import ResultsScreen from './ResultsScreen';
-import AppHeading from './AppHeading';
 import { saveProgress } from '../services/storageService';
 
 function TestPortal({ questions, onTestComplete }) {
@@ -20,7 +20,7 @@ function TestPortal({ questions, onTestComplete }) {
     try {
       setAnswers(prev => ({
         ...prev,
-        [questionId]: selectedAnswer,
+        [questionId]: selectedAnswer
       }));
     } catch (err) {
       setError('Failed to save answer');
@@ -46,7 +46,7 @@ function TestPortal({ questions, onTestComplete }) {
     try {
       saveProgress(answers);
       setTestComplete(true);
-      if (onTestComplete) {
+      if (typeof onTestComplete === 'function') {
         onTestComplete(answers);
       }
     } catch (err) {
@@ -57,9 +57,14 @@ function TestPortal({ questions, onTestComplete }) {
 
   if (error) {
     return (
-      <div className="container">
-        <AppHeading />
-        <div className="error" role="alert">
+      <div
+        className="container"
+        role="alert"
+        aria-live="assertive"
+        data-testid="error-container"
+      >
+        <h1>US-TN Driver Licence Practice Test</h1>
+        <div className="error">
           <p>{error}</p>
         </div>
       </div>
@@ -81,53 +86,66 @@ function TestPortal({ questions, onTestComplete }) {
   }
 
   const currentQuestion = questions[currentQuestionIndex];
+  const totalQuestions = questions.length;
+  const isLastQuestion = currentQuestionIndex === totalQuestions - 1;
+  const isFirstQuestion = currentQuestionIndex === 0;
+  const currentAnswer = answers[currentQuestion.id];
 
   return (
-    <div className="container">
-      <AppHeading />
-      <div style={{ marginBottom: '1rem', color: '#555', textAlign: 'right', fontSize: '0.95rem' }}>
-        Question {currentQuestionIndex + 1} of {questions.length}
+    <div className="container" data-testid="test-portal">
+      <h1>US-TN Driver Licence Practice Test</h1>
+
+      <div className="progress-info" aria-live="polite">
+        <span>
+          Question {currentQuestionIndex + 1} of {totalQuestions}
+        </span>
       </div>
+
       <Question
         question={currentQuestion}
-        selectedAnswer={answers[currentQuestion.id]}
+        selectedAnswer={currentAnswer}
         onAnswerSelect={handleAnswerSelect}
       />
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1.5rem' }}>
+
+      <div className="navigation-buttons">
         <button
           onClick={handlePrevious}
-          disabled={currentQuestionIndex === 0}
-          style={{
-            padding: '0.6rem 1.5rem',
-            fontSize: '1rem',
-            backgroundColor: currentQuestionIndex === 0 ? '#ccc' : '#2e7d32',
-            color: '#fff',
-            border: 'none',
-            borderRadius: '6px',
-            cursor: currentQuestionIndex === 0 ? 'not-allowed' : 'pointer',
-            fontWeight: 700,
-          }}
+          disabled={isFirstQuestion}
+          className="btn btn-secondary"
+          aria-label="Go to previous question"
+          data-testid="prev-button"
         >
           Previous
         </button>
+
         <button
           onClick={handleNext}
-          style={{
-            padding: '0.6rem 1.5rem',
-            fontSize: '1rem',
-            backgroundColor: '#2e7d32',
-            color: '#fff',
-            border: 'none',
-            borderRadius: '6px',
-            cursor: 'pointer',
-            fontWeight: 700,
-          }}
+          disabled={!currentAnswer}
+          className="btn btn-primary"
+          aria-label={isLastQuestion ? 'Submit test' : 'Go to next question'}
+          data-testid="next-button"
         >
-          {currentQuestionIndex < questions.length - 1 ? 'Next' : 'Finish'}
+          {isLastQuestion ? 'Submit' : 'Next'}
         </button>
       </div>
     </div>
   );
 }
+
+TestPortal.propTypes = {
+  questions: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      text: PropTypes.string,
+      correctAnswer: PropTypes.string,
+      options: PropTypes.arrayOf(PropTypes.string)
+    })
+  ).isRequired,
+  onTestComplete: PropTypes.func
+};
+
+TestPortal.defaultProps = {
+  onTestComplete: null
+};
 
 export default TestPortal;
