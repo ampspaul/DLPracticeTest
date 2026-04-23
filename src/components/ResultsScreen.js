@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import AppHeading from './AppHeading';
 
 function ResultsScreen({ questions, answers, onReturnHome }) {
   const results = useMemo(() => {
@@ -21,13 +22,13 @@ function ResultsScreen({ questions, answers, onReturnHome }) {
     return {
       score: correctCount,
       total: total,
-      percentage: percentage
+      percentage: percentage,
     };
   }, [questions, answers]);
 
   return (
     <div className="container">
-      <h1>US-TN Driver Licence Practice Test</h1>
+      <AppHeading />
       <h2>Test Complete!</h2>
       <div className="success">
         <h3>Your Results</h3>
@@ -45,16 +46,28 @@ function ResultsScreen({ questions, answers, onReturnHome }) {
           {results.percentage >= 80
             ? '✓ Excellent! You are well-prepared for the exam.'
             : results.percentage >= 60
-            ? '◐ Good! Review the areas where you need improvement.'
-            : '✗ Keep practicing! Focus on the challenging topics.'}
+            ? '◐ Good! Review the areas where you struggled before the real exam.'
+            : '✗ More practice needed. Review the material and try again.'}
         </p>
       </div>
 
-      <div className="button-group">
-        <button onClick={onReturnHome} aria-label="Return to home page">
-          Return to Home
+      {onReturnHome && (
+        <button
+          onClick={onReturnHome}
+          style={{
+            padding: '0.75rem 2rem',
+            fontSize: '1rem',
+            backgroundColor: '#2e7d32',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '6px',
+            cursor: 'pointer',
+            fontWeight: 700,
+          }}
+        >
+          Return Home
         </button>
-      </div>
+      )}
     </div>
   );
 }

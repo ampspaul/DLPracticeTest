@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Question from './Question';
 import ResultsScreen from './ResultsScreen';
+import AppHeading from './AppHeading';
 import { saveProgress } from '../services/storageService';
 
 function TestPortal({ questions, onTestComplete }) {
@@ -19,7 +20,7 @@ function TestPortal({ questions, onTestComplete }) {
     try {
       setAnswers(prev => ({
         ...prev,
-        [questionId]: selectedAnswer
+        [questionId]: selectedAnswer,
       }));
     } catch (err) {
       setError('Failed to save answer');
@@ -45,6 +46,9 @@ function TestPortal({ questions, onTestComplete }) {
     try {
       saveProgress(answers);
       setTestComplete(true);
+      if (onTestComplete) {
+        onTestComplete(answers);
+      }
     } catch (err) {
       setError('Failed to save test results');
       console.error('Error completing test:', err);
@@ -54,17 +58,10 @@ function TestPortal({ questions, onTestComplete }) {
   if (error) {
     return (
       <div className="container">
-        <div className="error" role="alert">{error}</div>
-        <button onClick={onTestComplete}>Return to Home</button>
-      </div>
-    );
-  }
-
-  if (!Array.isArray(questions) || questions.length === 0) {
-    return (
-      <div className="container">
-        <div className="error" role="alert">No questions available</div>
-        <button onClick={onTestComplete}>Return to Home</button>
+        <AppHeading />
+        <div className="error" role="alert">
+          <p>{error}</p>
+        </div>
       </div>
     );
   }
@@ -79,52 +76,54 @@ function TestPortal({ questions, onTestComplete }) {
     );
   }
 
+  if (!Array.isArray(questions) || questions.length === 0) {
+    return null;
+  }
+
   const currentQuestion = questions[currentQuestionIndex];
-  const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
 
   return (
     <div className="container">
-      <h1>US-TN Driver Licence Practice Test</h1>
-
-      <div style={{ marginBottom: '20px' }}>
-        <p style={{ color: '#666', marginBottom: '10px' }}>
-          Question {currentQuestionIndex + 1} of {questions.length}
-        </p>
-        <div style={{
-          width: '100%',
-          height: '8px',
-          backgroundColor: '#e0e0e0',
-          borderRadius: '4px',
-          overflow: 'hidden'
-        }}>
-          <div style={{
-            width: `${progress}%`,
-            height: '100%',
-            backgroundColor: '#667eea',
-            transition: 'width 0.3s ease'
-          }}></div>
-        </div>
+      <AppHeading />
+      <div style={{ marginBottom: '1rem', color: '#555', textAlign: 'right', fontSize: '0.95rem' }}>
+        Question {currentQuestionIndex + 1} of {questions.length}
       </div>
-
       <Question
         question={currentQuestion}
-        selected={answers[currentQuestion.id] || null}
-        onSelectAnswer={(answer) => handleAnswerSelect(currentQuestion.id, answer)}
+        selectedAnswer={answers[currentQuestion.id]}
+        onAnswerSelect={handleAnswerSelect}
       />
-
-      <div className="button-group">
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1.5rem' }}>
         <button
           onClick={handlePrevious}
           disabled={currentQuestionIndex === 0}
-          aria-label="Previous question"
+          style={{
+            padding: '0.6rem 1.5rem',
+            fontSize: '1rem',
+            backgroundColor: currentQuestionIndex === 0 ? '#ccc' : '#2e7d32',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '6px',
+            cursor: currentQuestionIndex === 0 ? 'not-allowed' : 'pointer',
+            fontWeight: 700,
+          }}
         >
           Previous
         </button>
         <button
           onClick={handleNext}
-          aria-label={currentQuestionIndex === questions.length - 1 ? 'Submit test' : 'Next question'}
+          style={{
+            padding: '0.6rem 1.5rem',
+            fontSize: '1rem',
+            backgroundColor: '#2e7d32',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '6px',
+            cursor: 'pointer',
+            fontWeight: 700,
+          }}
         >
-          {currentQuestionIndex === questions.length - 1 ? 'Submit' : 'Next'}
+          {currentQuestionIndex < questions.length - 1 ? 'Next' : 'Finish'}
         </button>
       </div>
     </div>

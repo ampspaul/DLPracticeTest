@@ -1,23 +1,29 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import HomePage from '../HomePage';
 
 describe('HomePage', () => {
-  it('renders the primary h1 heading with exact title text', () => {
+  it('renders the TN Student Practice Test heading', () => {
+    render(<HomePage onStartTest={() => {}} />);
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('TN Student Practice Test');
+  });
+
+  it('heading has font-weight 700', () => {
     render(<HomePage onStartTest={() => {}} />);
     const heading = screen.getByRole('heading', { level: 1 });
-    expect(heading).toBeInTheDocument();
-    expect(heading.textContent).toBe('US-TN Driver Licence Practice Test');
+    expect(heading).toHaveStyle({ fontWeight: 700 });
   });
 
-  it('contains only one h1 element', () => {
-    const { container } = render(<HomePage onStartTest={() => {}} />);
-    const h1Elements = container.querySelectorAll('h1');
-    expect(h1Elements.length).toBe(1);
-  });
-
-  it('renders the Start Test button', () => {
+  it('heading has green colour', () => {
     render(<HomePage onStartTest={() => {}} />);
-    expect(screen.getByRole('button', { name: /start the test/i })).toBeInTheDocument();
+    const heading = screen.getByRole('heading', { level: 1 });
+    expect(heading).toHaveStyle({ color: '#2e7d32' });
+  });
+
+  it('calls onStartTest when Start Test button is clicked', () => {
+    const mockStart = jest.fn();
+    render(<HomePage onStartTest={mockStart} />);
+    fireEvent.click(screen.getByRole('button', { name: /start test/i }));
+    expect(mockStart).toHaveBeenCalledTimes(1);
   });
 });

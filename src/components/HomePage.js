@@ -1,23 +1,27 @@
 import React from 'react';
+import AppHeading from './AppHeading';
 
 function HomePage({ onStartTest }) {
   return (
     <div className="container">
-      <h1>US-TN Driver Licence Practice Test</h1>
-      <p>
-        Welcome to the US-TN Driver Licence Practice Test Portal. This application
-        helps you prepare for your driver licence exam by providing practice
-        questions covering key topics.
-      </p>
-      <h2>How to Use:</h2>
-      <ol style={{ paddingLeft: '20px', color: '#666', lineHeight: '1.8' }}>
-        <li>Click the button below to start the test</li>
-        <li>Read each question carefully and select your answer</li>
-        <li>Your progress is automatically saved</li>
-        <li>Review your results and score at the end</li>
-      </ol>
-      <div className="button-group">
-        <button onClick={onStartTest} aria-label="Start the test">
+      <AppHeading />
+      <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+        <p style={{ fontSize: '1.1rem', color: '#333', marginBottom: '1.5rem' }}>
+          Prepare for your Tennessee Driver Licence exam with this practice test.
+        </p>
+        <button
+          onClick={onStartTest}
+          style={{
+            padding: '0.75rem 2rem',
+            fontSize: '1rem',
+            backgroundColor: '#2e7d32',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '6px',
+            cursor: 'pointer',
+            fontWeight: 700,
+          }}
+        >
           Start Test
         </button>
       </div>

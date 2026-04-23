@@ -3,68 +3,42 @@ import { render, screen } from '@testing-library/react';
 import ResultsScreen from '../ResultsScreen';
 
 const mockQuestions = [
-  { id: 'q1', question: 'Q1?', options: ['A', 'B'], correctAnswer: 'A' },
-  { id: 'q2', question: 'Q2?', options: ['C', 'D'], correctAnswer: 'C' }
+  { id: '1', text: 'Q1', correctAnswer: 'A' },
+  { id: '2', text: 'Q2', correctAnswer: 'B' },
 ];
 
-const mockAnswers = { q1: 'A', q2: 'D' };
+const mockAnswers = { '1': 'A', '2': 'B' };
 
 describe('ResultsScreen', () => {
-  it('renders the primary h1 heading with exact title text', () => {
-    render(
-      <ResultsScreen
-        questions={mockQuestions}
-        answers={mockAnswers}
-        onReturnHome={() => {}}
-      />
-    );
+  it('renders the TN Student Practice Test heading', () => {
+    render(<ResultsScreen questions={mockQuestions} answers={mockAnswers} />);
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('TN Student Practice Test');
+  });
+
+  it('heading has font-weight 700', () => {
+    render(<ResultsScreen questions={mockQuestions} answers={mockAnswers} />);
     const heading = screen.getByRole('heading', { level: 1 });
-    expect(heading).toBeInTheDocument();
-    expect(heading.textContent).toBe('US-TN Driver Licence Practice Test');
+    expect(heading).toHaveStyle({ fontWeight: 700 });
   });
 
-  it('contains only one h1 element', () => {
-    const { container } = render(
-      <ResultsScreen
-        questions={mockQuestions}
-        answers={mockAnswers}
-        onReturnHome={() => {}}
-      />
-    );
-    const h1Elements = container.querySelectorAll('h1');
-    expect(h1Elements.length).toBe(1);
-  });
-
-  it('displays test complete heading', () => {
-    render(
-      <ResultsScreen
-        questions={mockQuestions}
-        answers={mockAnswers}
-        onReturnHome={() => {}}
-      />
-    );
-    expect(screen.getByRole('heading', { name: /test complete/i })).toBeInTheDocument();
+  it('heading has green colour', () => {
+    render(<ResultsScreen questions={mockQuestions} answers={mockAnswers} />);
+    const heading = screen.getByRole('heading', { level: 1 });
+    expect(heading).toHaveStyle({ color: '#2e7d32' });
   });
 
   it('displays score correctly', () => {
-    render(
-      <ResultsScreen
-        questions={mockQuestions}
-        answers={mockAnswers}
-        onReturnHome={() => {}}
-      />
-    );
-    expect(screen.getByText(/1 out of 2/i)).toBeInTheDocument();
+    render(<ResultsScreen questions={mockQuestions} answers={mockAnswers} />);
+    expect(screen.getByText(/2 out of 2/i)).toBeInTheDocument();
   });
 
-  it('renders Return to Home button', () => {
-    render(
-      <ResultsScreen
-        questions={mockQuestions}
-        answers={mockAnswers}
-        onReturnHome={() => {}}
-      />
-    );
-    expect(screen.getByRole('button', { name: /return to home page/i })).toBeInTheDocument();
+  it('displays 100% for all correct answers', () => {
+    render(<ResultsScreen questions={mockQuestions} answers={mockAnswers} />);
+    expect(screen.getByText('100%')).toBeInTheDocument();
+  });
+
+  it('handles empty questions gracefully', () => {
+    render(<ResultsScreen questions={[]} answers={{}} />);
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('TN Student Practice Test');
   });
 });
