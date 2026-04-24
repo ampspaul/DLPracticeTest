@@ -1,54 +1,77 @@
 'use strict';
 
-const HEADING_TEXT = 'Tennessee Student Driver\'s License Practice Test';
-const SECTION_HEADING = 'TN Student Practice Questions';
+/**
+ * DL Practice Test - Application Logic
+ */
+
+const CORRECT_ANSWERS = {
+  q1: 'c',
+  q2: 'b',
+};
 
 /**
- * Initialises the practice test application.
+ * Calculates the score from form data.
+ * @param {FormData} formData
+ * @returns {{ score: number, total: number }}
+ */
+function calculateScore(formData) {
+  let score = 0;
+  const total = Object.keys(CORRECT_ANSWERS).length;
+
+  for (const [question, correctAnswer] of Object.entries(CORRECT_ANSWERS)) {
+    if (formData.get(question) === correctAnswer) {
+      score += 1;
+    }
+  }
+
+  return { score, total };
+}
+
+/**
+ * Displays the result section with the calculated score.
+ * @param {number} score
+ * @param {number} total
+ */
+function displayResults(score, total) {
+  const resultsSection = document.getElementById('results');
+  const scoreDisplay = document.getElementById('score-display');
+
+  if (!resultsSection || !scoreDisplay) {
+    console.error('Results elements not found in the DOM.');
+    return;
+  }
+
+  scoreDisplay.textContent = `You scored ${score} out of ${total}.`;
+  resultsSection.hidden = false;
+  resultsSection.scrollIntoView({ behavior: 'smooth' });
+}
+
+/**
+ * Handles quiz form submission.
+ * @param {Event} event
+ */
+function handleFormSubmit(event) {
+  event.preventDefault();
+
+  const form = event.target;
+  const formData = new FormData(form);
+  const { score, total } = calculateScore(formData);
+
+  displayResults(score, total);
+}
+
+/**
+ * Initialises the application.
  */
 function init() {
-    setHeading();
-    loadQuestions();
-}
+  const form = document.getElementById('quiz-form');
 
-/**
- * Sets the main page heading.
- */
-function setHeading() {
-    const mainHeading = document.getElementById('main-heading');
-    if (mainHeading) {
-        mainHeading.textContent = HEADING_TEXT;
-    }
-}
+  if (!form) {
+    console.error('Quiz form not found.');
+    return;
+  }
 
-/**
- * Loads practice questions into the DOM.
- */
-function loadQuestions() {
-    const questionArea = document.getElementById('question-area');
-    if (!questionArea) {
-        return;
-    }
-    // Questions are loaded from questions.js
-    if (typeof questions !== 'undefined' && Array.isArray(questions)) {
-        renderQuestions(questions, questionArea);
-    }
-}
-
-/**
- * Renders questions into the provided container element.
- * @param {Array} questionList - Array of question objects.
- * @param {HTMLElement} container - DOM element to render into.
- */
-function renderQuestions(questionList, container) {
-    container.innerHTML = '';
-    questionList.forEach(function (q, index) {
-        const questionEl = document.createElement('div');
-        questionEl.classList.add('question');
-        questionEl.setAttribute('data-index', index);
-        questionEl.textContent = (index + 1) + '. ' + q.text;
-        container.appendChild(questionEl);
-    });
+  form.addEventListener('submit', handleFormSubmit);
 }
 
 document.addEventListener('DOMContentLoaded', init);

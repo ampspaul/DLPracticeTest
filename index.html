@@ -1,23 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Driver's License Practice Test - Prepare for your driving exam." />
     <title>DL Practice Test</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <h1 id="main-heading">Tennessee Student Driver's License Practice Test</h1>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <h1>Driver's License Practice Test</h1>
+        <nav aria-label="Main navigation">
+          <ul>
+            <li><a href="#quiz">Start Test</a></li>
+            <li><a href="#results">Results</a></li>
+          </ul>
+        </nav>
+      </div>
     </header>
-    <main>
-        <section id="test-container">
-            <h2>TN Student Practice Questions</h2>
-            <div id="question-area"></div>
-            <div id="answer-area"></div>
-            <div id="result-area"></div>
-        </section>
+
+    <main class="container">
+      <section id="quiz" class="quiz-section" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Practice Questions</h2>
+
+        <form id="quiz-form" novalidate>
+          <div class="question" id="question-1">
+            <p>1. What does a red traffic light mean?</p>
+            <ul class="options" role="list">
+              <li>
+                <label>
+                  <input type="radio" name="q1" value="a" />
+                  Go
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="radio" name="q1" value="b" />
+                  Slow down
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="radio" name="q1" value="c" />
+                  Stop
+                </label>
+              </li>
+            </ul>
+          </div>
+
+          <div class="question" id="question-2">
+            <p>2. What is the speed limit in a school zone unless otherwise posted?</p>
+            <ul class="options" role="list">
+              <li>
+                <label>
+                  <input type="radio" name="q2" value="a" />
+                  15 mph
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="radio" name="q2" value="b" />
+                  25 mph
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="radio" name="q2" value="c" />
+                  35 mph
+                </label>
+              </li>
+            </ul>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit Answers</button>
+        </form>
+      </section>
+
+      <section id="results" class="results" aria-live="polite" hidden>
+        <h2>Your Results</h2>
+        <p id="score-display"></p>
+      </section>
     </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>&copy; 2024 DL Practice Test. All rights reserved.</p>
+      </div>
+    </footer>
+
     <script src="app.js"></script>
-</body>
+  </body>
 </html>
