@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- **HomePage heading text**: Updated the main page heading in `HomePage.js` to display `'TN Student Practice Test'` (previously unspecified / default text)
+- **HomePage heading style**: Applied `font-weight: bold` (`700`) to the main heading in `HomePage.js` for improved visual prominence
+- **HomePage heading colour**: Set heading text colour to blue on `HomePage.js`; exact hex value / design token pending stakeholder confirmation
+- **Responsive heading consistency**: Heading style (bold weight, blue colour) is applied uniformly across desktop, tablet, and mobile viewports — no layout, navigation, or functional behaviour on the home page was altered
+
 ### Added
 - **Expanded Question Bank**: Added 50+ multiple-choice questions covering comprehensive driver license examination topics
   - Road signs and traffic signals (8-10 questions)
