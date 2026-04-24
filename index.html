@@ -4,20 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DL Practice Test</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1 id="main-heading">Tennessee Student Driver's License Practice Test</h1>
+        <h1 class="heading-dark-green">Driving License Practice Test</h1>
     </header>
-    <main>
-        <section id="test-container">
-            <h2>TN Student Practice Questions</h2>
-            <div id="question-area"></div>
-            <div id="answer-area"></div>
-            <div id="result-area"></div>
+    <main id="quiz-container">
+        <section id="question-section" aria-live="polite">
+            <h2 id="question-text" class="question-heading"></h2>
+            <ul id="options-list" role="list"></ul>
         </section>
+        <section id="result-section" aria-live="assertive" hidden>
+            <p id="result-text"></p>
+        </section>
+        <nav id="navigation" aria-label="Quiz navigation">
+            <button id="next-btn" type="button">Next</button>
+        </nav>
     </main>
-    <script src="app.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

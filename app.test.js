@@ -1,59 +1,48 @@
+/**
+ * Tests for DL Practice Test application logic.
+ */
+
 'use strict';
 
-// Minimal test suite for heading rename and core app functions
+const { calculateScore } = require('./app');
 
-describe('Heading constants', function () {
-    it('HEADING_TEXT should reference Tennessee Student', function () {
-        expect(typeof HEADING_TEXT).toBe('string');
-        expect(HEADING_TEXT).toContain('Tennessee Student');
-    });
+// Mock FormData for Node.js test environment
+class MockFormData {
+  constructor(data = {}) {
+    this._data = data;
+  }
 
-    it('SECTION_HEADING should reference TN Student', function () {
-        expect(typeof SECTION_HEADING).toBe('string');
-        expect(SECTION_HEADING).toContain('TN Student');
-    });
-});
+  get(key) {
+    return this._data[key] || null;
+  }
+}
 
-describe('setHeading', function () {
-    beforeEach(function () {
-        document.body.innerHTML = '<h1 id="main-heading"></h1>';
-    });
+describe('calculateScore', () => {
+  test('returns full score when all answers are correct', () => {
+    const formData = new MockFormData({ q1: 'c', q2: 'b' });
+    const { score, total } = calculateScore(formData);
+    expect(score).toBe(2);
+    expect(total).toBe(2);
+  });
 
-    it('should set the main heading text', function () {
-        setHeading();
-        const el = document.getElementById('main-heading');
-        expect(el.textContent).toBe(HEADING_TEXT);
-    });
+  test('returns zero score when all answers are wrong', () => {
+    const formData = new MockFormData({ q1: 'a', q2: 'a' });
+    const { score, total } = calculateScore(formData);
+    expect(score).toBe(0);
+    expect(total).toBe(2);
+  });
 
-    it('should not throw if main-heading element is missing', function () {
-        document.body.innerHTML = '';
-        expect(function () { setHeading(); }).not.toThrow();
-    });
-});
+  test('returns partial score for mixed answers', () => {
+    const formData = new MockFormData({ q1: 'c', q2: 'a' });
+    const { score, total } = calculateScore(formData);
+    expect(score).toBe(1);
+    expect(total).toBe(2);
+  });
 
-describe('renderQuestions', function () {
-    it('should render the correct number of question elements', function () {
-        const container = document.createElement('div');
-        const mockQuestions = [
-            { text: 'What is the speed limit in a school zone?' },
-            { text: 'When must you use your headlights?' }
-        ];
-        renderQuestions(mockQuestions, container);
-        expect(container.querySelectorAll('.question').length).toBe(2);
-    });
-
-    it('should number questions starting from 1', function () {
-        const container = document.createElement('div');
-        const mockQuestions = [{ text: 'Sample question?' }];
-        renderQuestions(mockQuestions, container);
-        const first = container.querySelector('.question');
-        expect(first.textContent).toMatch(/^1\./);
-    });
-
-    it('should clear previous content before rendering', function () {
-        const container = document.createElement('div');
-        container.innerHTML = '<div class="question">old</div>';
-        renderQuestions([], container);
-        expect(container.querySelectorAll('.question').length).toBe(0);
-    });
+  test('returns zero score when no answers provided', () => {
+    const formData = new MockFormData({});
+    const { score, total } = calculateScore(formData);
+    expect(score).toBe(0);
+    expect(total).toBe(2);
+  });
 });

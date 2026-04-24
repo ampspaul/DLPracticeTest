@@ -1,0 +1,172 @@
+/* DL Practice Test - Main Stylesheet */
+/* Dark green heading feature */
+
+:root {
+  --color-heading-dark-green: #1a5c2a;
+  --color-heading-dark-green-hover: #144a22;
+  --color-background: #ffffff;
+  --color-text: #333333;
+  --color-border: #cccccc;
+  --font-family-primary: Arial, Helvetica, sans-serif;
+  --font-size-h1: 2rem;
+  --font-size-h2: 1.5rem;
+  --font-size-h3: 1.25rem;
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family-primary);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+/* Dark green heading styles */
+h1,
+h2,
+h3 {
+  color: var(--color-heading-dark-green);
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+}
+
+/* Container */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+}
+
+/* Header */
+.site-header {
+  background-color: var(--color-background);
+  border-bottom: 2px solid var(--color-heading-dark-green);
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+}
+
+.site-header h1 {
+  color: var(--color-heading-dark-green);
+}
+
+/* Navigation */
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+nav a {
+  color: var(--color-heading-dark-green);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover,
+nav a:focus {
+  color: var(--color-heading-dark-green-hover);
+  text-decoration: underline;
+}
+
+/* Quiz / Practice Test */
+.quiz-section {
+  margin-bottom: 2rem;
+}
+
+.quiz-section h2 {
+  color: var(--color-heading-dark-green);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.question {
+  margin-bottom: 1.5rem;
+}
+
+.question p {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.options {
+  list-style: none;
+}
+
+.options li {
+  margin-bottom: 0.5rem;
+}
+
+.options label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: var(--font-family-primary);
+  transition: background-color 0.2s ease;
+}
+
+.btn-primary {
+  background-color: var(--color-heading-dark-green);
+  color: #ffffff;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--color-heading-dark-green-hover);
+  outline: 2px solid var(--color-heading-dark-green-hover);
+  outline-offset: 2px;
+}
+
+/* Results */
+.results {
+  background-color: #f0f7f2;
+  border: 1px solid var(--color-heading-dark-green);
+  border-radius: 4px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.results h2 {
+  color: var(--color-heading-dark-green);
+}
+
+/* Footer */
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  padding: 1rem 0;
+  margin-top: 3rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #666666;
+}
