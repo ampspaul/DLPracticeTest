@@ -8,10 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
-- **HomePage heading text**: Updated the main page heading in `HomePage.js` to display `'TN Student Practice Test'` (previously unspecified / default text)
-- **HomePage heading style**: Applied `font-weight: bold` (`700`) to the main heading in `HomePage.js` for improved visual prominence
-- **HomePage heading colour**: Set heading text colour to blue on `HomePage.js`; exact hex value / design token pending stakeholder confirmation
-- **Responsive heading consistency**: Heading style (bold weight, blue colour) is applied uniformly across desktop, tablet, and mobile viewports — no layout, navigation, or functional behaviour on the home page was altered
+- **HomePage heading colour** (`HomePage.js`, `style.css`): Updated main page heading text colour from blue to **Dark Green** (exact hex value / design token pending stakeholder confirmation). `font-weight: 700` is unchanged.
+- **Responsive heading consistency** (`style.css`, `index.html`): Dark Green heading colour is applied uniformly across all supported viewports — desktop (≥1024 px), tablet (768–1023 px), and mobile (<768 px) — preserving existing responsive behaviour. No layout, navigation, question bank logic, scoring, storage, or functional behaviour was altered.
+- **HomePage heading text**: Updated the main page heading in `HomePage.js` to display `'TN Student Practice Test'`
+- **HomePage heading weight**: `font-weight: bold` (`700`) retained on the main heading in `HomePage.js`; no change to font weight required or made
 
 ### Added
 - **Expanded Question Bank**: Added 50+ multiple-choice questions covering comprehensive driver license examination topics
@@ -35,7 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - storageService module for persistent storage of test attempts, responses, and scores
 - Progress tracking functionality displaying current question number and total questions
 - Answer review capability allowing users to review responses after test completion
-- Responsive CSS styling with App.css for consistent UI/UX
+- Responsive CSS styling with `style.css` for consistent UI/UX
 - Support for localStorage persistence of test data and user scores
-- Public/index.html entry point for React application
+- `index.html` entry point for the application
 - Comprehensive project documentation in README.md
