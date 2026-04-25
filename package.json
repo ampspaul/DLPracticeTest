@@ -1,17 +1,14 @@
 {
-  "name": "dl-practice-test",
+  "name": "dlpracticetest",
   "version": "1.0.0",
-  "description": "Driver's License Practice Test web application",
+  "description": "Driver's License Practice Test",
   "main": "app.js",
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "test": "node tests/app.test.js"
   },
   "devDependencies": {
-    "jest": "^29.0.0"
+    "jsdom": "^24.0.0"
   },
-  "jest": {
-    "testEnvironment": "node"
-  },
+  "keywords": ["drivers-license", "practice-test"],
   "license": "MIT"
 }

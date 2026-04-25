@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HomePage matches snapshot (bold italic dark-red heading) 1`] = `
+<div
+  className="home-page"
+>
+  <h1
+    className="home-heading"
+  >
+    TN Student Practice Test
+  </h1>
+  <p
+    className="home-subheading"
+  >
+    Select a subject and begin your practice session.
+  </p>
+  <button
+    className="start-button"
+    onClick={[MockFunction]}
+  >
+    Start Test
+  </button>
+</div>
+`;
