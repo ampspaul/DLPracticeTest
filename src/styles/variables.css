@@ -1,0 +1,15 @@
+/* =============================================================
+   Design Tokens – Colour Palette
+   =============================================================
+   NOTE: --color-dark-purple value (#4B0082) is a placeholder.
+   Design team must confirm the exact hex value before release.
+   Only this file needs updating once the value is confirmed.
+   ============================================================= */
+
+:root {
+  /* Purple */
+  --color-dark-purple: #4B0082;
+
+  /* Legacy greens (kept for reference; no longer used on home heading) */
+  /* --color-dark-green: #1a5c38; */
+}
