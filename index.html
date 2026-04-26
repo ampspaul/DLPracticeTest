@@ -1,27 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DL Practice Test</title>
-    <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DL Practice Test</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <div class="container">
-        <h1>Driver's License Practice Test</h1>
-        <h2>Test Your Knowledge</h2>
-
-        <div id="quiz-container">
-            <!-- Questions rendered by JS -->
-        </div>
-
-        <button class="btn" id="submit-btn" type="button">Submit Answers</button>
-
-        <div class="score-summary" id="score-summary" style="display:none;">
-            <h3>Your Results</h3>
-            <p id="score-text"></p>
-        </div>
-    </div>
-    <script src="app.js"></script>
+  <header>
+    <h1>Driving Licence Practice Test</h1>
+  </header>
+  <main>
+    <section class="question-section">
+      <h2>Question</h2>
+      <div id="question-container"></div>
+    </section>
+    <section class="results-section" id="results" hidden>
+      <h2 class="results-heading">Your Results</h2>
+      <div id="results-container"></div>
+    </section>
+  </main>
+  <script src="app.js"></script>
 </body>
 </html>
