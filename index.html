@@ -3,23 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DL Practice Test</title>
+  <title>Driver's License Practice Test</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header>
-    <h1>Driving Licence Practice Test</h1>
-  </header>
-  <main>
-    <section class="question-section">
-      <h2>Question</h2>
-      <div id="question-container"></div>
-    </section>
-    <section class="results-section" id="results" hidden>
-      <h2 class="results-heading">Your Results</h2>
-      <div id="results-container"></div>
-    </section>
-  </main>
+  <h1>Driver's License Practice Test</h1>
+
+  <div id="quiz-container">
+    <div id="question-text"></div>
+    <div id="options-container"></div>
+  </div>
+
+  <button id="submit-btn">Submit</button>
+
+  <section id="score-summary">
+    <p id="score-text"></p>
+  </section>
+
   <script src="app.js"></script>
 </body>
 </html>
