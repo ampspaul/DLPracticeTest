@@ -1,11 +1,12 @@
 import React from 'react';
+import '../styles/variables.css';
 
 const styles = {
   desktop: {
     heading: {
       fontWeight: 700,
       fontStyle: 'italic',
-      color: '#0000CD',
+      color: 'var(--heading-color)',
       fontSize: '2.5rem',
     },
     container: {
@@ -18,7 +19,7 @@ const styles = {
     heading: {
       fontWeight: 700,
       fontStyle: 'italic',
-      color: '#0000CD',
+      color: 'var(--heading-color)',
       fontSize: '2rem',
     },
     container: {
@@ -29,7 +30,7 @@ const styles = {
     heading: {
       fontWeight: 700,
       fontStyle: 'italic',
-      color: '#0000CD',
+      color: 'var(--heading-color)',
       fontSize: '1.5rem',
     },
     container: {
@@ -61,7 +62,9 @@ function HomePage() {
 
   return (
     <div style={currentStyles.container}>
-      <h1 style={currentStyles.heading}>TN Student Practice Test</h1>
+      <h1 data-testid="home-heading" style={currentStyles.heading}>
+        TN Student Practice Test
+      </h1>
     </div>
   );
 }

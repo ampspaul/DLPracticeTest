@@ -2,28 +2,27 @@
  * src/styles/variables.css
  * Design tokens / CSS custom properties.
  *
- * QA Fix #347 — Updated heading colour tokens to Blue (#0000CD).
- * Removed / replaced #FF8C00 (Dark Orange), #4B0082 (Dark Purple), #8B0000 (Dark Red).
+ * QA Fix #337 — Updated heading colour tokens to Dark Orange.
+ * Removed / replaced #4B0082 (Dark Purple) and #8B0000 (Dark Red).
  */
 
 :root {
-  /* Heading colour — Blue (QA spec #347) */
-  --heading-color: #0000CD;
+  /* Heading colour — Dark Orange #FF8C00 (QA spec #337) */
+  --heading-color: #FF8C00;
 
   /* Font style tokens for heading */
   --heading-font-weight: 700;
   --heading-font-style: italic;
 
-  /* General palette */
-  --primary-color: #0000CD;
+  /* General palette — primary aligned with heading colour per QA spec #337 */
+  --primary-color: #FF8C00;
   --background-color: #ffffff;
   --text-color: #333333;
 
   /*
-   * REMOVED legacy tokens that caused QA colour regressions:
-   *   --heading-color (was #FF8C00 Dark Orange)
-   *   --heading-color-dark-purple: #4B0082  — removed in QA fix #337
-   *   --heading-color-dark-red:    #8B0000  — removed in QA fix #337
-   * None of the above values are defined anywhere in the codebase.
+   * REMOVED legacy tokens that caused the QA colour regression:
+   *   --heading-color-dark-purple: #4B0082;
+   *   --heading-color-dark-red:    #8B0000;
+   * These are no longer defined anywhere in the codebase.
    */
 }
