@@ -1,0 +1,176 @@
+/* Main stylesheet for DL Practice Test */
+
+:root {
+  --color-dark-orange: #cc5500;
+  --color-dark-orange-hover: #aa4400;
+  --color-text-primary: #333333;
+  --color-background: #ffffff;
+}
+
+/* Base reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: var(--color-text-primary);
+  background-color: var(--color-background);
+  line-height: 1.6;
+}
+
+/* Heading styles — dark orange */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #cc5500; /* fallback */
+  color: var(--color-dark-orange);
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+/* Navigation */
+nav {
+  background-color: #cc5500;
+  background-color: var(--color-dark-orange);
+  padding: 1rem;
+}
+
+nav a {
+  color: #ffffff;
+  text-decoration: none;
+  margin-right: 1rem;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Main content */
+main {
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Question container */
+.question-container {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.question-container h2 {
+  color: #cc5500;
+  color: var(--color-dark-orange);
+  margin-bottom: 1rem;
+}
+
+/* Answer options */
+.answer-options {
+  list-style: none;
+}
+
+.answer-options li {
+  margin-bottom: 0.5rem;
+}
+
+.answer-options label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.btn-primary {
+  background-color: #cc5500;
+  background-color: var(--color-dark-orange);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: #aa4400;
+  background-color: var(--color-dark-orange-hover);
+}
+
+/* Results section */
+.results {
+  text-align: center;
+  padding: 2rem;
+}
+
+.results h1 {
+  color: #cc5500;
+  color: var(--color-dark-orange);
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Score display */
+.score {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #cc5500;
+  color: var(--color-dark-orange);
+}
+
+/* Footer */
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+/* Utility classes */
+.text-dark-orange {
+  color: #cc5500;
+  color: var(--color-dark-orange);
+}
+
+.bg-dark-orange {
+  background-color: #cc5500;
+  background-color: var(--color-dark-orange);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
