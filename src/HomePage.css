@@ -1,0 +1,56 @@
+/* ============================================================
+   HomePage.css
+   QA Fix #337 — heading: Dark Orange (#FF8C00), bold, italic
+   Legacy values #4B0082 (Dark Purple) and #8B0000 (Dark Red)
+   have been fully removed from this file.
+   ============================================================ */
+
+/* ---------- Base heading rule ---------- */
+.home-page__heading {
+  color: #FF8C00;          /* Dark Orange — QA spec */
+  font-weight: 700;        /* bold */
+  font-style: italic;
+  /* Additional base typographic defaults */
+  font-size: 2rem;
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+}
+
+/* ---------- Desktop (≥ 1024 px) ---------- */
+@media (min-width: 1024px) {
+  .home-page__heading {
+    color: #FF8C00;
+    font-weight: 700;
+    font-style: italic;
+    font-size: 2.5rem;
+  }
+}
+
+/* ---------- Tablet (768 px – 1023 px) ---------- */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .home-page__heading {
+    color: #FF8C00;
+    font-weight: 700;
+    font-style: italic;
+    font-size: 2rem;
+  }
+}
+
+/* ---------- Mobile (< 768 px) ---------- */
+@media (max-width: 767px) {
+  .home-page__heading {
+    color: #FF8C00;
+    font-weight: 700;
+    font-style: italic;
+    font-size: 1.5rem;
+  }
+}
+
+/* ---------- General page layout ---------- */
+.home-page {
+  padding: 1rem;
+}
+
+.home-page__content {
+  margin-top: 1rem;
+}
