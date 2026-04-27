@@ -1,5 +1,6 @@
 /*
- * src/App.css
+ * src/styles/global.css
+ * Global stylesheet.
  *
  * QA Fix #347 — Confirmed: no rules targeting the HomePage heading selector
  * with #FF8C00, #4B0082, or #8B0000 exist in this file.
@@ -7,6 +8,15 @@
  * and src/styles/HomePage.css.
  */
 
-.App {
-  text-align: center;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background-color: #ffffff;
+  color: #333333;
 }

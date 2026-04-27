@@ -5,7 +5,7 @@ const styles = {
     heading: {
       fontWeight: 700,
       fontStyle: 'italic',
-      color: '#006400',
+      color: '#0000CD',
       fontSize: '2.5rem',
     },
     container: {
@@ -18,7 +18,7 @@ const styles = {
     heading: {
       fontWeight: 700,
       fontStyle: 'italic',
-      color: '#006400',
+      color: '#0000CD',
       fontSize: '2rem',
     },
     container: {
@@ -29,7 +29,7 @@ const styles = {
     heading: {
       fontWeight: 700,
       fontStyle: 'italic',
-      color: '#006400',
+      color: '#0000CD',
       fontSize: '1.5rem',
     },
     container: {
