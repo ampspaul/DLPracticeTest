@@ -1,0 +1,40 @@
+/*
+ * src/styles/homepage.css
+ * Component-scoped styles for HomePage.
+ * Consumes design tokens from variables.css.
+ */
+
+.home-container {
+  padding: var(--container-padding-desktop);
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+}
+
+.home-heading {
+  font-weight: var(--heading-font-weight);
+  font-style: var(--heading-font-style);
+  color: var(--heading-color); /* Dark Orange — QA spec #337 */
+  font-size: var(--heading-font-size-desktop);
+}
+
+/* ── Tablet ──────────────────────────────────────────────────────────────── */
+@media (max-width: 1023px) and (min-width: 768px) {
+  .home-container {
+    padding: var(--container-padding-tablet);
+  }
+
+  .home-heading {
+    font-size: var(--heading-font-size-tablet);
+  }
+}
+
+/* ── Mobile ──────────────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .home-container {
+    padding: var(--container-padding-mobile);
+  }
+
+  .home-heading {
+    font-size: var(--heading-font-size-mobile);
+  }
+}
