@@ -4,25 +4,37 @@
  *
  * QA Fix #337 — Updated heading colour tokens to Dark Orange.
  * Removed / replaced #4B0082 (Dark Purple) and #8B0000 (Dark Red).
+ * Fixed regression: #006400 (Dark Green) was also incorrect — replaced with Dark Orange.
  */
 
 :root {
-  /* Heading colour — Dark Orange #FF8C00 (QA spec #337) */
+  /* ── Heading tokens ─────────────────────────────────────────────────────── */
+  /* Heading colour — Dark Orange (QA spec #337) */
   --heading-color: #FF8C00;
-
-  /* Font style tokens for heading */
   --heading-font-weight: 700;
   --heading-font-style: italic;
 
-  /* General palette — primary aligned with heading colour per QA spec #337 */
+  /* ── Responsive heading sizes ───────────────────────────────────────────── */
+  --heading-font-size-desktop: 2.5rem;
+  --heading-font-size-tablet: 2rem;
+  --heading-font-size-mobile: 1.5rem;
+
+  /* ── General palette ────────────────────────────────────────────────────── */
   --primary-color: #FF8C00;
   --background-color: #ffffff;
   --text-color: #333333;
+
+  /* ── Layout ─────────────────────────────────────────────────────────────── */
+  --container-padding-desktop: 40px;
+  --container-max-width: 1200px;
+  --container-padding-tablet: 24px;
+  --container-padding-mobile: 16px;
 
   /*
    * REMOVED legacy tokens that caused the QA colour regression:
    *   --heading-color-dark-purple: #4B0082;
    *   --heading-color-dark-red:    #8B0000;
+   *   (inline hardcoded value)     #006400  (Dark Green — was wrongly used in HomePage.js)
    * These are no longer defined anywhere in the codebase.
    */
 }
