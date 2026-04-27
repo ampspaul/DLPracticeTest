@@ -1,16 +1,17 @@
 import React from 'react';
-import './HomePage.css';
 
-const HomePage = ({ onStart }) => {
+const headingStyle = {
+  color: '#4B0082',
+  fontWeight: 700,
+  fontStyle: 'italic',
+};
+
+function HomePage() {
   return (
-    <div className="home-page">
-      <h1 className="home-heading">TN Student Practice Test</h1>
-      <p className="home-subheading">Select a subject and begin your practice session.</p>
-      <button className="start-button" onClick={onStart}>
-        Start Test
-      </button>
+    <div>
+      <h1 style={headingStyle}>TN Student Practice Test</h1>
     </div>
   );
-};
+}
 
 export default HomePage;
