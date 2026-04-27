@@ -18,7 +18,7 @@ A ReactJS-based web portal for driver license practice tests, enabling users to 
 ### Core Components
 
 - **App.js**: Main application component managing test state and routing
-- **HomePage.js**: Landing page for test selection and initialization. Displays the main page heading **'TN Student Practice Test'**, styled with bold font weight (`font-weight: 700`), italic font style (`font-style: italic`), and Dark Purple text colour (`#4B0082`). The heading style is applied consistently across all supported viewports (desktop ≥1024 px, tablet 768–1023 px, and mobile <768 px) to preserve responsive behaviour. No other text, layout, navigation, or functional behaviour is affected by this styling.
+- **HomePage.js**: Landing page for test selection and initialization. Displays the main page heading **'TN Student Practice Test'**, styled with bold font weight (`font-weight: 700`), italic font style (`font-style: italic`), and Dark Orange text colour (`#FF8C00`). The heading style is applied consistently across all supported viewports (desktop ≥1024 px, tablet 768–1023 px, and mobile <768 px) to preserve responsive behaviour. No other text, layout, navigation, or functional behaviour is affected by this styling.
 - **TestPortal.js**: Main testing interface displaying questions and capturing responses, manages 50+ question sequence
 - **Question.js**: Individual question component with answer options (supports 4+ choices)
 - **ResultsScreen.js**: Results summary and answer review screen with score calculation
@@ -100,10 +100,10 @@ The main heading on `HomePage.js` renders the text **'TN Student Practice Test'*
 | Text | `TN Student Practice Test` |
 | `font-weight` | `bold` / `700` |
 | `font-style` | `italic` |
-| `color` | Dark Purple — `#4B0082` |
+| `color` | Dark Orange — `#FF8C00` |
 | Responsive | Applied consistently across desktop (≥1024 px), tablet (768–1023 px), and mobile (<768 px) viewports |
 
-The heading styles are applied in-place within the existing responsive CSS rules in `styles.css`. No duplicate or conflicting rules are introduced. No other text, layout, navigation, or functional behaviour in `HomePage.js` or any other component is altered.
+The heading colour (`#FF8C00`) is applied in all locations where the heading colour is defined — inline styles, CSS class rules, CSS custom properties/variables, CSS-in-JS/theme tokens, and `@media` blocks — replacing the previous Dark Purple value (`#4B0082`) in its entirety. The heading styles are applied in-place within the existing responsive CSS rules in `styles.css`. No duplicate or conflicting rules are introduced. No other text, layout, navigation, or functional behaviour in `HomePage.js` or any other component is altered.
 
 ## Browser Support
 
@@ -131,4 +131,4 @@ When users complete tests, storageService persists:
 
 ### Home Page Heading Style
 
-The heading style in `HomePage.js` is intentionally scoped to the `h1` / main heading element only. No other text, layout elements, navigation links, or functional behaviour on the home page are modified. The heading is styled with `font-weight: 700`, `font-style: italic`, and colour `#4B0082` (Dark Purple). These styles are applied consistently at desktop (≥1024 px), tablet (768 px–1023 px), and mobile (<768 px) breakpoints by updating the existing responsive rules in `styles.css` in-place — no duplicate or conflicting rules are introduced. The old Dark Red value (`#8B0000`) has been fully removed and replaced in all relevant style definitions for the heading.
+The heading style in `HomePage.js` is intentionally scoped to the `h1` / main heading element only. No other text, layout elements, navigation links, or functional behaviour on the home page are modified. The heading is styled with `font-weight: 700`, `font-style: italic`, and colour `#FF8C00` (Dark Orange). These styles are applied consistently at desktop (≥1024 px), tablet (768 px–1023 px), and mobile (<768 px) breakpoints by updating the existing responsive rules in-place — including all inline styles, CSS class rules, CSS custom properties/variables, CSS-in-JS/theme tokens, and `@media` blocks — so no duplicate or conflicting rules are introduced. The old Dark Purple value (`#4B0082`) has been fully removed and replaced in all relevant style definitions for the heading.

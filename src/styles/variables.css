@@ -1,0 +1,8 @@
+:root {
+  /* Heading colour: Dark Orange (updated from Dark Purple #4B0082) */
+  --heading-color: #FF8C00;
+
+  /* Font styles */
+  --heading-font-weight: 700;
+  --heading-font-style: italic;
+}

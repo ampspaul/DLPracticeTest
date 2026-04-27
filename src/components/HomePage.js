@@ -1,15 +1,19 @@
 import React from 'react';
-
-const headingStyle = {
-  color: '#4B0082',
-  fontWeight: 700,
-  fontStyle: 'italic',
-};
+import './HomePage.css';
 
 function HomePage() {
   return (
-    <div>
-      <h1 style={headingStyle}>TN Student Practice Test</h1>
+    <div className="home-page">
+      <h1
+        className="home-heading"
+        style={{
+          color: '#FF8C00',
+          fontWeight: 700,
+          fontStyle: 'italic',
+        }}
+      >
+        TN Student Practice Test
+      </h1>
     </div>
   );
 }

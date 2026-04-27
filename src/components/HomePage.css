@@ -1,74 +1,38 @@
-/* ============================================================
-   HomePage — main styles
-   PBI #295: heading is bold (700) + italic + dark red (#8B0000)
-   Meets WCAG AA: #8B0000 on white ≈ 5.9:1 contrast ratio
-   ============================================================ */
+/* HomePage styles */
 
 .home-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 2rem;
-  box-sizing: border-box;
-  background-color: #ffffff;
+  padding: 20px;
 }
 
-/* ── Main heading ── */
 .home-heading {
-  font-size: 2.5rem;       /* desktop default */
-  font-weight: 700;        /* bold — preserved */
-  font-style: italic;      /* new: italic */
-  color: #8B0000;          /* dark red — replaces dark green */
-  text-align: center;
-  margin: 0 0 1rem 0;
+  color: #FF8C00;
+  font-weight: 700;
+  font-style: italic;
 }
 
-/* ── Tablet (768 – 1023 px) ── */
-@media (max-width: 1023px) and (min-width: 768px) {
+/* Tablet viewport: 768px – 1023px */
+@media (min-width: 768px) and (max-width: 1023px) {
   .home-heading {
-    font-size: 2rem;
-    font-weight: 700;      /* bold — preserved */
-    font-style: italic;    /* italic */
-    color: #8B0000;        /* dark red */
+    color: #FF8C00;
+    font-weight: 700;
+    font-style: italic;
   }
 }
 
-/* ── Mobile (< 768 px) ── */
+/* Mobile viewport: < 768px */
 @media (max-width: 767px) {
   .home-heading {
-    font-size: 1.5rem;
-    font-weight: 700;      /* bold — preserved */
-    font-style: italic;    /* italic */
-    color: #8B0000;        /* dark red */
+    color: #FF8C00;
+    font-weight: 700;
+    font-style: italic;
   }
 }
 
-/* ── Subheading ── */
-.home-subheading {
-  font-size: 1.125rem;
-  color: #333333;
-  text-align: center;
-  margin: 0 0 2rem 0;
-}
-
-/* ── Start button ── */
-.start-button {
-  padding: 0.75rem 2rem;
-  font-size: 1rem;
-  font-weight: 600;
-  background-color: #005a9c;
-  color: #ffffff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.start-button:hover,
-.start-button:focus {
-  background-color: #004080;
-  outline: 2px solid #004080;
-  outline-offset: 2px;
+/* Desktop viewport: >= 1024px */
+@media (min-width: 1024px) {
+  .home-heading {
+    color: #FF8C00;
+    font-weight: 700;
+    font-style: italic;
+  }
 }
