@@ -1,17 +1,16 @@
 import React from 'react';
+import '../styles/variables.css';
 
-const HEADING_COLOR = '#8B0000';
-
-const baseHeading = {
+const baseHeadingStyle = {
   fontWeight: 700,
   fontStyle: 'italic',
-  color: HEADING_COLOR,
+  color: 'var(--heading-color)',
 };
 
 const styles = {
   desktop: {
     heading: {
-      ...baseHeading,
+      ...baseHeadingStyle,
       fontSize: '2.5rem',
     },
     container: {
@@ -22,7 +21,7 @@ const styles = {
   },
   tablet: {
     heading: {
-      ...baseHeading,
+      ...baseHeadingStyle,
       fontSize: '2rem',
     },
     container: {
@@ -31,7 +30,7 @@ const styles = {
   },
   mobile: {
     heading: {
-      ...baseHeading,
+      ...baseHeadingStyle,
       fontSize: '1.5rem',
     },
     container: {
@@ -63,9 +62,7 @@ function HomePage() {
 
   return (
     <div style={currentStyles.container}>
-      <h1 data-testid="page-heading" style={currentStyles.heading}>
-        TN Student Practice Test
-      </h1>
+      <h1 style={currentStyles.heading}>TN Student Practice Test</h1>
     </div>
   );
 }
