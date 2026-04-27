@@ -1,0 +1,66 @@
+/* Heading styles — dark orange theme */
+
+:root {
+  --color-heading-dark-orange: #cc5500;
+  --color-heading-dark-orange-hover: #a34400;
+}
+
+/* Primary heading styles */
+h1,
+h2,
+h3 {
+  color: var(--color-heading-dark-orange, #cc5500);
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 2rem;
+  color: var(--color-heading-dark-orange, #cc5500);
+}
+
+h2 {
+  font-size: 1.5rem;
+  color: var(--color-heading-dark-orange, #cc5500);
+}
+
+h3 {
+  font-size: 1.25rem;
+  color: var(--color-heading-dark-orange, #cc5500);
+}
+
+/* Section headings */
+.section-heading {
+  color: var(--color-heading-dark-orange, #cc5500);
+  border-bottom: 2px solid var(--color-heading-dark-orange, #cc5500);
+  padding-bottom: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+/* Question heading */
+.question-heading {
+  color: var(--color-heading-dark-orange, #cc5500);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* Hover state for interactive headings */
+a h1,
+a h2,
+a h3,
+h1 a,
+h2 a,
+h3 a {
+  color: var(--color-heading-dark-orange, #cc5500);
+  text-decoration: none;
+}
+
+a h1:hover,
+a h2:hover,
+a h3:hover,
+h1 a:hover,
+h2 a:hover,
+h3 a:hover {
+  color: var(--color-heading-dark-orange-hover, #a34400);
+  text-decoration: underline;
+}
